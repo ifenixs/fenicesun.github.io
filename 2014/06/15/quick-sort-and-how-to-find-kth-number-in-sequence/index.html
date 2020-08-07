@@ -1,51 +1,150 @@
-extends base
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="fenice's blog"><title>quick sort and how to find kth number in sequence | FENICE</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/clipboard/dist/clipboard.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.js"></script><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.css"><meta name="generator" content="Hexo 5.0.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">quick sort and how to find kth number in sequence</h1><a id="logo" href="/.">FENICE</a><p class="description">Rock and opera fans</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> Home</i></a><a href="/archives/"><i class="fa fa-archive"> Archive</i></a><a href="/about/"><i class="fa fa-user"> About</i></a><a href="/atom.xml"><i class="fa fa-rss"> RSS</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">quick sort and how to find kth number in sequence</h1><div class="post-meta">2014-06-15<span> | </span><span class="category"><a href="/categories/algorithm/">algorithm</a></span></div><div class="post-content"><h3 id="快速排序与寻找序列中的第k个线性统计量"><a href="#快速排序与寻找序列中的第k个线性统计量" class="headerlink" title="快速排序与寻找序列中的第k个线性统计量"></a>快速排序与寻找序列中的第k个线性统计量</h3><blockquote>
+<p>快速排序（quick sort）基于二分（分治方法）的原地排序算法，算法平均复杂度O(lgn)具有非常优秀的性能，通常情况优于合并排序(merge sort)和堆排序(heap sort)。其中的线形划分操作可以看作冒泡排序中冒泡操作的一种改进，且具有很多其他的应用。</p>
+</blockquote>
+<p>和前面文章中介绍过的<a href="http://fenicesun.com/2014/05/30/merge-sort-and-the-number-of-inversions/">合并排序</a>类似, 快速排序也是基于分治法的处理策略。其基本思想是，通过一轮的线性划分和元素交换将待排序序列A[p..r]划分成A[p..q-1], A[q], A[q+1..r]三部分，并保证A[p..q-1]中任意元素 &lt;= A[q] &lt;= A[q+1..r]中任意元素（假设升序）,然后分别对子序列A[p..q-1]及A[q+1..r]进行线性划分, 直到序列为单个元素（必定有序）。排序的过程中，由于已经划分开的元素不需要进行比较，故减少了比较次数，降低了排序时间。</p>
+<h4 id="分治法框架描述"><a href="#分治法框架描述" class="headerlink" title="分治法框架描述"></a>分治法框架描述</h4><p>1.分解（divide）: 将数组A[p..r]划分成两个（可能空）子数组A[p..q-1]和A[q+1..r]，使得A[p..q-1]中的每个元素都小于等于A[q]，而且小于等于A[q+1..r]中的元素。下标q也在划分的过程中进行计算。<br>2.解决（conquer）: 递归调用快速排序，对子数组A[p..q-1]和A[p+1..r]进行排序。<br>3.合并（merge）: 由于两个子序列是原地排序，故不需要合并操作。</p>
+<p>下面是快速排序的过程：</p>
+<pre><code>#include &lt;functional&gt;
 
-block title
-  title= page.title + ' | ' + config.title
+template &lt;typename T&gt;
+class Sorter
+&amp;#123;
+    static void QuickSort(T array[], int low, int high, const std::function&lt;int(T, T)&gt; &amp;cmp);
+    static int hoare_partition(T array[], int low, int high, const std::function&lt;int(T, T)&gt; &amp;cmp);
+    static int partition(T array[], int low, int high, const std::function&lt;int(T, T)&gt; &amp;cmp);
+    static void Swap(T *a, T *b);
+    static T SelectIth(T array[], int low, int high, int index, const std::function&lt;int(T, T)&gt; &amp;cmp);
+&amp;#125;;
 
-block content
-  .post
-    h1.post-title= page.title
-    .post-meta= page.date.format('ll')
-      if page.categories.length > 0
-        span= ' | '
-        span.category
-          for category in page.categories.toArray()
-            a(href=url_for(category.path))= category.name
-      if theme.busuanzi == true
-        script(src='https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js', async)
-        span#busuanzi_container_page_pv= ' | '
-          span#busuanzi_value_page_pv
-          span= ' ' + __('Hits')
-    if theme.duoshuo
-      a.ds-thread-count(data-thread-key=page.path, href=url_for(page.path) + '#comments')
-    if theme.disqus
-      a.disqus-comment-count(data-disqus-identifier=page.path, href=url_for(page.path) + '#disqus_thread')
-    if page.toc
-      div(class='clear')
-        div(id='toc' class='toc-article')
-          div(class='toc-title')= __('contents')
-          != toc(page.content)
-    .post-content
-      != page.content
-    if theme.shareto == true
-      script(type='text/javascript', src=url_for(theme.js) + '/share.js' + '?v=' + theme.version, async)
-      a.article-share-link(data-url='#{page.permalink}', data-id='#{page._id}')= __('shareto')
-    include _partial/tag
-    include _partial/post_nav
-    if theme.duoshuo
-      div(class='ds-share flat' data-thread-key=page.path, data-title=page.title, data-url=page.permalink)
-         .ds-share-inline
-            ul.ds-share-icons-16
-              li(data-toggle='ds-share-icons-more')
-                a(class='ds-more' href='javascript:void(0);') 分享到：
-              li
-                a(class='ds-weibo' href='javascript:void(0);' data-service='weibo') 微博
-              li
-                a(class='ds-qzone' href='javascript:void(0);' data-service='qzone') QQ空间
-              li
-                a(class='ds-qqt' href='javascript:void(0);' data-service='qqt') 腾讯微博
-              li
-                a(class='ds-wechat' href='javascript:void(0);' data-service='wechat') 微信
-            .ds-share-icons-more
-    include _partial/comments
+template &lt;typename T&gt;
+void Sorter&lt;T&gt;::QuickSort(T *array, int low, int high, const std::function&lt;int(T, T)&gt; &amp;cmp) &amp;#123;
+    if (low &lt; high) &amp;#123;
+        int mid = partition(array, low, high, cmp);
+        QuickSort(array, low, mid - 1, cmp);
+        QuickSort(array, mid + 1, high, cmp);
+    &amp;#125;
+&amp;#125;</code></pre>
+<p>若排序一个完整数组，最初调用过程为Sorter<Type>::QuickSort(A, 0, (sizeof(A)/sizeof(Type) - 1);</p>
+<h4 id="线性划分"><a href="#线性划分" class="headerlink" title="线性划分"></a>线性划分</h4><p>快速排序最关键的算法就是PARTITION操作，他可以对数组A[p..r]进行就地重拍。PARTITION操作有多种算法，下面介绍最初的Hoare划分和算法导论中的优化版本。</p>
+<h5 id="Hoare划分"><a href="#Hoare划分" class="headerlink" title="Hoare划分"></a>Hoare划分</h5><p>快速排序的算法思想由C.A.R.Hoare提出，并给出了一个最初版本的划分方法，据说改进自冒泡操作。代码如下：</p>
+<pre><code>template &lt;typename T&gt;
+int Sorter&lt;T&gt;::hoare_partition(T *array, int low, int high, const std::function&lt;int(T, T)&gt; &amp;cmp) &amp;#123;
+    int left = low, right = high;
+    T x = array[left];
+    while (left &lt; right) &amp;#123;
+        while (left &lt; right &amp;&amp; cmp(x, array[right])) &amp;#123;
+            right--;
+        &amp;#125;
+        if (left &lt; right) &amp;#123;
+            array[left] = array[right];
+            left++;
+        &amp;#125;
+        while (left &lt; right &amp;&amp; !cmp(x, array[left])) &amp;#123;
+            left++;
+        &amp;#125;
+        if (left &lt; right) &amp;#123;
+            array[right] = array[left];
+            right--;
+        &amp;#125;
+    &amp;#125;
+    array[left] = x;
+    return left;
+&amp;#125;</code></pre>
+<p>下面来分析上面这段代码，假设排序为升序<br>1、 维护两个指针，left指向序列的低位，right指向序列的高位。选取序列的最低位元素为主元（pivot）。<br>2、 right指针／游标从高位向低位移动，直到遇到第一个比主元小的元素，然后把当前元素赋值给left指针所指向的位置；left指针／游标从低位向高位移动，直到遇到第一个比主元大的元素，然后把当前元素赋值给right指针所指向的元素。<br>3、 按上述方式不断进行，直到left游标和right游标相遇，此时将主元填入left=right的位置。</p>
+<p>Hoare-partition过程结束后，A[p..q-1]中的每个元素都小于等于A[q+1..r]中的每一个元素。Hoare-partition方法又滋生出很多变种，都是减少划分过程中的比较次数，这里不展开讲述。</p>
+<h5 id="优化版本"><a href="#优化版本" class="headerlink" title="优化版本"></a>优化版本</h5><p>再到后来，N.Lomuto又提出了一种优化版本的划分方法，它现在写在算法导论一书中，C++代码如下：</p>
+<pre><code>template &lt;typename T&gt;
+int Sorter&lt;T&gt;::partition(T *array, int low, int high, const std::function&lt;int(T, T)&gt; &amp;cmp) &amp;#123;
+    T x = array[high];
+    int i = low - 1;
+    for (int j = low; j &lt; high; j++) &amp;#123;
+        if (cmp(array[j], x)) &amp;#123;
+            i++;
+            Swap(&amp;array[i], &amp;array[j]);
+        &amp;#125;
+    &amp;#125;
+    Swap(&amp;array[i + 1], &amp;array[high]);
+    return i + 1;
+&amp;#125;</code></pre>
+<p>这段代码是不是比hoare的版本简洁明了多了？ 不仅简短，而且更高效。<br>下面详细描述N.Momuto的PARTITION划分过程</p>
+<p>PARTITION总是选择一个主元T x = array[high]，并围绕它来划分序列A[p..r]。随着该过程的开始，序列将被划分成四个区域。具体每一步变化过程如下：</p>
+<pre><code>   i p,j                 r
+  |2  8  7  1  3  5  6| 4
+
+   p,i  j                r
+  |2| 8  7  1  3  5  6| 4
+
+   p,i    j              r
+  |2| 8| 7  1  3  5  6| 4
+
+   p,i       j           r
+  |2| 8  7| 1  3  5  6| 4
+
+   p  i         j        r
+  |2| 1| 7  8| 3  5  6| 4
+
+   p     i        j      r
+  |2| 1  3| 8  7| 5  6| 4 
+
+   p     i            j  r
+  |2| 1  3| 8  7  5| 6| 4
+
+   p     i               r
+  |2| 1  3| 8  7  5  6| 4
+
+   p     i               r
+   2  1  3 |4| 7  5  6  8 |</code></pre>
+<p>简而言之，跟hoare划分一样维护两个游标，但是从同一断开时向另一端移动，j每次移动时都比较array[j]和主元，如果比主元小，就将array[j]与array[i]的下一个元素进行置换，并移动i游标。<br>在上述代码的循环不定式中，对于任何数组下标k，都有</p>
+<ol>
+<li>如果p&lt;= k &lt;= i，则A[k] &lt;= x</li>
+<li>如果i+1 &lt;= k &lt;= j-1，则A[k]    &gt; x</li>
+<li>如果k=r，则A[k] = x</li>
+</ol>
+<p>PARTITION操作作用于数组A[p..r]得到四个区域，A[p..i]各元素都小于等于x，A[i+1..j-1]中的值都大于x，A[r] = x，A[j..r-1]中的值可以取任何值。</p>
+<h4 id="快速排序的时间复杂度"><a href="#快速排序的时间复杂度" class="headerlink" title="快速排序的时间复杂度"></a>快速排序的时间复杂度</h4><p>当基数值不能很好地分割数组，即基准值将数组分成一个子数组中有一个记录，而另一个子组组有 n -1 个记录时，下一次的子数组只比原来数组小 1，这是快速排序的最差的情况。如果这种情况发生在每次划分过程中，那么快速排序就退化成了冒泡排序，其时间复杂度为O(n2)。</p>
+<p>　　如果基准值都能讲数组分成相等的两部分，则出现快速排序的最佳情况。在这种情况下，我们还要对每个大小约为 n/2 的两个子数组进行排序。在一个大小为 n 的记录中确定一个记录的位置所需要的时间为O(n)。若T(n)为对n个记录进行排序所需要的时间，则每当一个记录得到其正确位置，整组大致分成两个相等的两部分时，我们得到快速排序算法的最佳时间复杂性。</p>
+<p>　　T(n) &lt;= cn + 2T(n/2)    c是一个常数</p>
+<p>　　　　　&lt;= cn + 2(cn/2+2T(n/4)) = 2cn+ 4T(n/4)</p>
+<p>　　　　　&lt;= 2cn + 4(cn/4+ 2T(n/8)) = 3cn + 8T(n/8)</p>
+<p>　　　　　　…… ……</p>
+<p>　　　　　&lt;= cnlogn + nT(1) = O(nlogn)      其中cn 是一次划分所用的时间，c是一个常数</p>
+<p>　　最坏的情况，每次划分都得到一个子序列，时间复杂度为：</p>
+<p>　　T(n) = cn + T(n-1)</p>
+<p>　　　　 = cn + c(n-1) + T(n - 2) = 2cn -c + T(n-2)</p>
+<pre><code>    = 2cn -c + c(n - 2) + T(n-3) = 3cn -3c + T(n-3)</code></pre>
+<p>　　　　……</p>
+<p>　　　　 = c[n(n+1)/2-1] + T(1) =  O(n2)</p>
+<p>　　快速排序的时间复杂度在平均情况下介于最佳与最差情况之间，假设每一次分割时，基准值处于最终排序好的位置的概率是一样的，基准值将数组分成长度为0 和 n-1，1 和 n-2，……的概率都是 1/n。在这种假设下，快速排序的平均时间复杂性为：</p>
+<p>　　　　T(n) = cn + 1/n(T(k)+ T(n-k-1))   T(0) = c, T(1) = c</p>
+<p>　　这是一个递推公式，T(k)和T(n-k-1)是指处理长度为 k 和 n-k-1 数组是快速排序算法所花费的时间， 根据公式所推算出来的时间为 O(nlogn)。因此快速排序的平均时间复杂性为O(nlogn)。</p>
+<p>　　快速排序需要栈空间来实现递归，如果数组按局等方式被分割时，则最大的递归深度为 log n，需要的栈空间为 O(log n)。最坏的情况下在递归的每一级上，数组分割成长度为0的左子数组和长度为 n - 1 的右数组。这种情况下，递归的深度就成为 n，需要的栈空间为 O(n)。</p>
+<p>　　因为快速排序在进行交换时，只是根据比较基数值判断是否交换，且不是相邻元素来交换，在交换过程中可能改变相同元素的顺序，因此是一种不稳定的排序算法。</p>
+<h4 id="第i个线性统计量（寻找序列中第i大的数）"><a href="#第i个线性统计量（寻找序列中第i大的数）" class="headerlink" title="第i个线性统计量（寻找序列中第i大的数）"></a>第i个线性统计量（寻找序列中第i大的数）</h4><p>在一个由n个元素组成的序列中，第i个线性统计量是符合该序列的第i个元素，其实也就是求序列顺序的第i大／小的元素。形式化地定义这个问题：</p>
+<ul>
+<li>Input: 一个包含n个元素的序列A和一个数i， 1 &lt;= i &lt;= n</li>
+<li>Output: 元素x(属于A)，恰好大于A中的i-1个元素。</li>
+</ul>
+<p>解决这问题的方法有很多</p>
+<ol>
+<li>朴素方法</li>
+<li>先对序列进行排序，取第i个元素</li>
+<li>维护一个二叉堆，弹出前i-1个元素</li>
+</ol>
+<p>这些方法都过于复杂，有没有更好的方法呢？<br>当然了，联想上面快速排序的PARTITION操作，马上就有灵感了。<br>在PARTITION操作中，序列A[p..r]被划分成A[p..q-1]，A[q]，A[q+1..r]，且有：<br>A[r..r]中任意元素&lt;= A[q] &lt;= A[q+1..r]，那么我们可以得出结论，对序列A[p..r]划分后，第q个线性统计量一定是A[q]。<br>假设我们要求的是第i个线性统计量，可以由分治法想到：<br>如果i==q，那么A[q]就是第i个线性统计量；<br>如果i &lt; q，可以在A[p..q-1]中寻找第i个线性统计量；<br>如果i &gt; q, 即在A[q+1..r]中寻找第i-（q+1-p）个线性统计量；</p>
+<p>由上面可以写出代码：</p>
+<pre><code>template &lt;typename T&gt;
+T Sorter&lt;T&gt;::SelectIth(T *array, int low, int high, int index, const std::function&lt;int(T, T)&gt; &amp;cmp) &amp;#123;
+    if (low == high)
+        return array[low];
+    int mid = partition(array, low, high, cmp);
+    int k = mid - low + 1;
+    if (index == k) &amp;#123;
+        return array[mid];
+    &amp;#125; else if (index &lt; k) &amp;#123;
+        return SelectIth(array, low, mid - 1, index, cmp);
+    &amp;#125; else &amp;#123;
+        return SelectIth(array, mid + 1, high, index - k, cmp);
+    &amp;#125;
+&amp;#125;</code></pre>
+<p>这样就解决了。</p>
+</div><div class="tags"><a href="/tags/algorithm/"><i class="fa fa-tag"></i>algorithm</a><a href="/tags/sort/"><i class="fa fa-tag"></i>sort</a></div><div class="post-nav"><a class="pre" href="/2014/06/20/heapsort-and-priority-queue/">heapsort and priority queue</a><a class="next" href="/2014/05/30/merge-sort-and-the-number-of-inversions/">merge sort and the number of inversions</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="https://fenicesun.com"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> Categories</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-Science/">Computer Science</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/algorithm/">algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/diary/">diary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/financial-mathematics/">financial mathematics</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/programming/">programming</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/reading-notes/">reading notes</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> Tags</i></div><div class="tagcloud"><a href="/tags/autumn/" style="font-size: 15px;">autumn</a> <a href="/tags/interest/" style="font-size: 15px;">interest</a> <a href="/tags/model/" style="font-size: 15px;">model</a> <a href="/tags/summer/" style="font-size: 15px;">summer</a> <a href="/tags/freedom/" style="font-size: 15px;">freedom</a> <a href="/tags/discipline/" style="font-size: 15px;">discipline</a> <a href="/tags/radio/" style="font-size: 15px;">radio</a> <a href="/tags/plot/" style="font-size: 15px;">plot</a> <a href="/tags/book/" style="font-size: 15px;">book</a> <a href="/tags/gcc/" style="font-size: 15px;">gcc</a> <a href="/tags/CSAPP/" style="font-size: 15px;">CSAPP</a> <a href="/tags/moon/" style="font-size: 15px;">moon</a> <a href="/tags/code/" style="font-size: 15px;">code</a> <a href="/tags/shanghai/" style="font-size: 15px;">shanghai</a> <a href="/tags/night/" style="font-size: 15px;">night</a> <a href="/tags/young/" style="font-size: 15px;">young</a> <a href="/tags/cpp/" style="font-size: 15px;">cpp</a> <a href="/tags/algorithm/" style="font-size: 15px;">algorithm</a> <a href="/tags/sort/" style="font-size: 15px;">sort</a> <a href="/tags/epoll/" style="font-size: 15px;">epoll</a> <a href="/tags/I-O/" style="font-size: 15px;">I/O</a> <a href="/tags/fork/" style="font-size: 15px;">fork</a> <a href="/tags/unix/" style="font-size: 15px;">unix</a> <a href="/tags/manjianghong/" style="font-size: 15px;">manjianghong</a> <a href="/tags/memory/" style="font-size: 15px;">memory</a> <a href="/tags/c/" style="font-size: 15px;">c</a> <a href="/tags/pointer/" style="font-size: 15px;">pointer</a> <a href="/tags/tail-call/" style="font-size: 15px;">tail call</a> <a href="/tags/recursive/" style="font-size: 15px;">recursive</a> <a href="/tags/segment-tree/" style="font-size: 15px;">segment tree</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/tools/" style="font-size: 15px;">tools</a> <a href="/tags/android/" style="font-size: 15px;">android</a> <a href="/tags/lambda/" style="font-size: 15px;">lambda</a> <a href="/tags/2017/" style="font-size: 15px;">2017</a> <a href="/tags/2018/" style="font-size: 15px;">2018</a> <a href="/tags/2019/" style="font-size: 15px;">2019</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> Recent</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/08/07/By-the-end-of-july-2020/">By the end of july 2020</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/true-code-one-s-complement-and-two-s-complement/">true code, one's complement and two's complement</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/07/CSAPP-notes-2-Representation-and-processing-of-information/">CSAPP notes 2: Representation and processing of information</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/29/Thoughts-about-Love-in-the-Time-of-Cholera/">Thoughts about Love in the Time of Cholera</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/12/CSAPP-notes-1-Roaming-in-computer-system/">CSAPP notes 1: Roaming in computer system</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/11/Recommended-CS-books-list-continuous-update/">Recommended CS books list[under continuous update]</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/27/Mourning-for-kobe-bryant/">Mourning for kobe bryant</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/20/The-annual-diary-from-2017-to-2019/">The annual diary from 2017 to 2019</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/18/The-commonly-used-compile-command-of-gcc/">The commonly used compile command of gcc</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/06/use-ListView-and-SimpleAdapter-to-create-list-items/">use ListView and SimpleAdapter to create list items</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> Links</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2020 <a href="/." rel="nofollow">FENICE.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.css"><script type="text/javascript" src="/js/copycode.js" successtext="Copy Successed!"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

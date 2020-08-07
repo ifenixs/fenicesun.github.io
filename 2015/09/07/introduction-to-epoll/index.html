@@ -1,51 +1,109 @@
-extends base
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="fenice's blog"><title>introduction to epoll | FENICE</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/clipboard/dist/clipboard.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.js"></script><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.css"><meta name="generator" content="Hexo 5.0.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">introduction to epoll</h1><a id="logo" href="/.">FENICE</a><p class="description">Rock and opera fans</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> Home</i></a><a href="/archives/"><i class="fa fa-archive"> Archive</i></a><a href="/about/"><i class="fa fa-user"> About</i></a><a href="/atom.xml"><i class="fa fa-rss"> RSS</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">introduction to epoll</h1><div class="post-meta">2015-09-07<span> | </span><span class="category"><a href="/categories/programming/">programming</a></span></div><div class="post-content"><h3 id="epoll详解"><a href="#epoll详解" class="headerlink" title="epoll详解"></a>epoll详解</h3><br/>
 
-block title
-  title= page.title + ' | ' + config.title
+<h4 id="为什么选择Epoll"><a href="#为什么选择Epoll" class="headerlink" title="为什么选择Epoll"></a>为什么选择Epoll</h4><ul>
+<li>SELECT受描述符数量的限制，一般为1024或2048。而epoll的支持的描述符数量与机器内存大小相关，每1G内存可以支持10万左右的描述符数。</li>
+<li>SELECT检查描述符上数据是否准备好需要通过轮询并用FD_ISSET检测整个描述符列表，而且检测报文到达的操作需要被频繁地调用，在并发连接数增加后性能会明显力不从心。相比SELECT，POLL也只是取消了最大监控文件描述符数量的限制，并没有从根本上解决SELECT存在的问题。<br/>
 
-block content
-  .post
-    h1.post-title= page.title
-    .post-meta= page.date.format('ll')
-      if page.categories.length > 0
-        span= ' | '
-        span.category
-          for category in page.categories.toArray()
-            a(href=url_for(category.path))= category.name
-      if theme.busuanzi == true
-        script(src='https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js', async)
-        span#busuanzi_container_page_pv= ' | '
-          span#busuanzi_value_page_pv
-          span= ' ' + __('Hits')
-    if theme.duoshuo
-      a.ds-thread-count(data-thread-key=page.path, href=url_for(page.path) + '#comments')
-    if theme.disqus
-      a.disqus-comment-count(data-disqus-identifier=page.path, href=url_for(page.path) + '#disqus_thread')
-    if page.toc
-      div(class='clear')
-        div(id='toc' class='toc-article')
-          div(class='toc-title')= __('contents')
-          != toc(page.content)
-    .post-content
-      != page.content
-    if theme.shareto == true
-      script(type='text/javascript', src=url_for(theme.js) + '/share.js' + '?v=' + theme.version, async)
-      a.article-share-link(data-url='#{page.permalink}', data-id='#{page._id}')= __('shareto')
-    include _partial/tag
-    include _partial/post_nav
-    if theme.duoshuo
-      div(class='ds-share flat' data-thread-key=page.path, data-title=page.title, data-url=page.permalink)
-         .ds-share-inline
-            ul.ds-share-icons-16
-              li(data-toggle='ds-share-icons-more')
-                a(class='ds-more' href='javascript:void(0);') 分享到：
-              li
-                a(class='ds-weibo' href='javascript:void(0);' data-service='weibo') 微博
-              li
-                a(class='ds-qzone' href='javascript:void(0);' data-service='qzone') QQ空间
-              li
-                a(class='ds-qqt' href='javascript:void(0);' data-service='qqt') 腾讯微博
-              li
-                a(class='ds-wechat' href='javascript:void(0);' data-service='wechat') 微信
-            .ds-share-icons-more
-    include _partial/comments
+</li>
+</ul>
+<h4 id="epoll的基本使用"><a href="#epoll的基本使用" class="headerlink" title="epoll的基本使用"></a>epoll的基本使用</h4><h5 id="1-epfd文件描述符的创建"><a href="#1-epfd文件描述符的创建" class="headerlink" title="1. epfd文件描述符的创建"></a>1. epfd文件描述符的创建</h5><pre><code>#include &lt;sys/epoll.h&gt;
+int epoll_create(int size);</code></pre>
+<p> 早期的epoll实现中，对监控文件描述符的组织并不是红黑树，而是哈希表。这里的size实际已经没有意义。</p>
+<h5 id="2-使用epoll-ctl注册监控的描述符和事件"><a href="#2-使用epoll-ctl注册监控的描述符和事件" class="headerlink" title="2. 使用epoll_ctl注册监控的描述符和事件"></a>2. 使用epoll_ctl注册监控的描述符和事件</h5><pre><code>#include &lt;sys/epoll.h&gt;
+int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event);</code></pre>
+<p>函数说明：</p>
+<ul>
+<li><p>epfd: 由epoll_create创建的epoll描述符</p>
+</li>
+<li><p>op:   指定的操作类型</p>
+<ul>
+<li>EPOLL_CTL_ADD: 往事件表中注册fd上的事件</li>
+<li>EPOLL_CTL_MOD: 修改fd上的注册事件</li>
+<li>EPOLL_CTL_DEL: 删除fd上的注册事件</li>
+</ul>
+</li>
+<li><p>event: 指定fd上的事件，它是epoll_event结构脂针类型</p>
+<ul>
+<li><p>epoll_event的定义：</p>
+<pre><code>
+    struct epoll_event &amp;#123;
+        __unit32_t events;  //epoll event
+        epoll_data_t data;  //user data
+    &amp;#125;    </code></pre>
+</li>
+<li><p>events: 描述事件类型</p>
+</li>
+<li><p>data成员: 存储用户数据</p>
+<pre><code>
+    typedef union epoll_data &amp;#123;
+        void* ptr;
+        int fd;     //指定所属的目标文件描述符
+        uint32_t u32;
+        uint64_t u64;
+    &amp;#125;</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="3-使用epoll-wait函数收集监听描述符的数据响应"><a href="#3-使用epoll-wait函数收集监听描述符的数据响应" class="headerlink" title="3. 使用epoll_wait函数收集监听描述符的数据响应"></a>3. 使用epoll_wait函数收集监听描述符的数据响应</h5><pre><code>#include &lt;sys/epoll.h&gt;
+int epoll_wait(int epfd, struct epoll_event* events, int maxevents, int timeout);</code></pre>
+<p>函数说明：</p>
+<ul>
+<li>返回值：成功时返回就绪的文件描述符的个数，失败时返回-1并设置errno</li>
+<li>timeout: 指定epoll_wait的超时时间，单位为毫秒。若timeout=-1表示epoll_wait将永远阻塞，直到IO事件发生。当timeout=0时，epoll_wait调用将立即返回。当timeout为大于0的正数时，即为epoll_wait超时的毫秒数。</li>
+<li>events: 这是一个用来返回的指针，将所有就绪事件从内核事件表拷贝到events指针所指向的数组中。</li>
+<li>maxevents: 指定最多监听多少个事件。</li>
+</ul>
+<br/>
+
+<h4 id="LT模式与ET模式"><a href="#LT模式与ET模式" class="headerlink" title="LT模式与ET模式"></a>LT模式与ET模式</h4><ul>
+<li>LT（水平触发模式）：只要fd满足相应的读写条件（有数据没有处理）就通知给用户空间，将epitem加入rdlist，进程被唤醒，epoll_wait继续执行。LT模式只要有数据没有处理就会一直通知下去。event触发的情况：<ol>
+<li>buffer中有数据可读的时候，即buffer不空的时候fd的event的可读就置1。</li>
+<li>buffer中有空间可写的时候，即buffer不满的时候fd的event</li>
+</ol>
+</li>
+<li>ET（边缘触发模式）：只有当fd的状态发生了改变，ep_poll_callback被调用。fd就绪只会被通知一次，而LT模式下只要满足读写条件就会返回就绪。如果使用ET模式，需要一直read/write到出错为止。导致fd状态改变：<ol>
+<li>当buffer由不可读状态变为可读状态，即由空变为不空的时候。</li>
+<li>当有新数据到达时，即buffer中的待读内容变多的时候。</li>
+<li>当buffer由不可写状态变为可写状态，即由满变为不满的时候。</li>
+<li>当旧有数据被发送走，即buffer中待写的内容变少的时候。</li>
+</ol>
+</li>
+</ul>
+<br/>
+
+<h4 id="epoll处理网络连接框架"><a href="#epoll处理网络连接框架" class="headerlink" title="epoll处理网络连接框架"></a>epoll处理网络连接框架</h4><pre><code>for( ; ; )
+    &amp;#123;
+        nfds = epoll_wait(epfd,events,20,500);
+        for(i=0;i&lt;nfds;++i)
+        &amp;#123;
+            if(events[i].data.fd==listenfd) //有新的连接
+            &amp;#123;
+                connfd = accept(listenfd,(sockaddr *)&amp;clientaddr, &amp;clilen); //accept这个连接
+                ev.data.fd=connfd;
+                ev.events=EPOLLIN|EPOLLET;
+                epoll_ctl(epfd,EPOLL_CTL_ADD,connfd,&amp;ev); //将新的fd添加到epoll的监听队列中
+            &amp;#125;
+            else if( events[i].events&amp;EPOLLIN ) //接收到数据，读socket
+            &amp;#123;
+                n = read(sockfd, line, MAXLINE)) &lt; 0    //读
+                ev.data.ptr = md;     //md为自定义类型，添加数据
+                ev.events=EPOLLOUT|EPOLLET;
+                epoll_ctl(epfd,EPOLL_CTL_MOD,sockfd,&amp;ev);//修改标识符，等待下一个循环时发送数据，异步处理的精髓
+            &amp;#125;
+            else if(events[i].events&amp;EPOLLOUT) //有数据待发送，写socket
+            &amp;#123;
+                struct myepoll_data* md = (myepoll_data*)events[i].data.ptr;    //取数据
+                sockfd = md-&gt;fd;
+                send( sockfd, md-&gt;ptr, strlen((char*)md-&gt;ptr), 0 );        //发送数据
+                ev.data.fd=sockfd;
+                ev.events=EPOLLIN|EPOLLET;
+                epoll_ctl(epfd,EPOLL_CTL_MOD,sockfd,&amp;ev); //修改标识符，等待下一个循环时接收数据
+            &amp;#125;
+            else
+            &amp;#123;
+                //其他的处理
+            &amp;#125;
+        &amp;#125;
+    &amp;#125;</code></pre>
+</div><div class="tags"><a href="/tags/epoll/"><i class="fa fa-tag"></i>epoll</a><a href="/tags/I-O/"><i class="fa fa-tag"></i>I/O</a></div><div class="post-nav"><a class="pre" href="/2015/11/30/use-gcc-extensions-to-define-lambda-macro/">use gcc extensions to define lambda macro</a><a class="next" href="/2015/09/06/make-your-unix-crash-in-3-seconds/">make your unix crash in 3 seconds</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="https://fenicesun.com"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> Categories</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-Science/">Computer Science</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/algorithm/">algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/diary/">diary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/financial-mathematics/">financial mathematics</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/programming/">programming</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/reading-notes/">reading notes</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> Tags</i></div><div class="tagcloud"><a href="/tags/autumn/" style="font-size: 15px;">autumn</a> <a href="/tags/interest/" style="font-size: 15px;">interest</a> <a href="/tags/model/" style="font-size: 15px;">model</a> <a href="/tags/summer/" style="font-size: 15px;">summer</a> <a href="/tags/freedom/" style="font-size: 15px;">freedom</a> <a href="/tags/discipline/" style="font-size: 15px;">discipline</a> <a href="/tags/radio/" style="font-size: 15px;">radio</a> <a href="/tags/plot/" style="font-size: 15px;">plot</a> <a href="/tags/book/" style="font-size: 15px;">book</a> <a href="/tags/gcc/" style="font-size: 15px;">gcc</a> <a href="/tags/CSAPP/" style="font-size: 15px;">CSAPP</a> <a href="/tags/moon/" style="font-size: 15px;">moon</a> <a href="/tags/code/" style="font-size: 15px;">code</a> <a href="/tags/shanghai/" style="font-size: 15px;">shanghai</a> <a href="/tags/night/" style="font-size: 15px;">night</a> <a href="/tags/young/" style="font-size: 15px;">young</a> <a href="/tags/cpp/" style="font-size: 15px;">cpp</a> <a href="/tags/algorithm/" style="font-size: 15px;">algorithm</a> <a href="/tags/sort/" style="font-size: 15px;">sort</a> <a href="/tags/epoll/" style="font-size: 15px;">epoll</a> <a href="/tags/I-O/" style="font-size: 15px;">I/O</a> <a href="/tags/fork/" style="font-size: 15px;">fork</a> <a href="/tags/unix/" style="font-size: 15px;">unix</a> <a href="/tags/manjianghong/" style="font-size: 15px;">manjianghong</a> <a href="/tags/memory/" style="font-size: 15px;">memory</a> <a href="/tags/c/" style="font-size: 15px;">c</a> <a href="/tags/pointer/" style="font-size: 15px;">pointer</a> <a href="/tags/tail-call/" style="font-size: 15px;">tail call</a> <a href="/tags/recursive/" style="font-size: 15px;">recursive</a> <a href="/tags/segment-tree/" style="font-size: 15px;">segment tree</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/tools/" style="font-size: 15px;">tools</a> <a href="/tags/android/" style="font-size: 15px;">android</a> <a href="/tags/lambda/" style="font-size: 15px;">lambda</a> <a href="/tags/2017/" style="font-size: 15px;">2017</a> <a href="/tags/2018/" style="font-size: 15px;">2018</a> <a href="/tags/2019/" style="font-size: 15px;">2019</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> Recent</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/08/07/By-the-end-of-july-2020/">By the end of july 2020</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/true-code-one-s-complement-and-two-s-complement/">true code, one's complement and two's complement</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/07/CSAPP-notes-2-Representation-and-processing-of-information/">CSAPP notes 2: Representation and processing of information</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/29/Thoughts-about-Love-in-the-Time-of-Cholera/">Thoughts about Love in the Time of Cholera</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/12/CSAPP-notes-1-Roaming-in-computer-system/">CSAPP notes 1: Roaming in computer system</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/11/Recommended-CS-books-list-continuous-update/">Recommended CS books list[under continuous update]</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/27/Mourning-for-kobe-bryant/">Mourning for kobe bryant</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/20/The-annual-diary-from-2017-to-2019/">The annual diary from 2017 to 2019</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/18/The-commonly-used-compile-command-of-gcc/">The commonly used compile command of gcc</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/06/use-ListView-and-SimpleAdapter-to-create-list-items/">use ListView and SimpleAdapter to create list items</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> Links</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2020 <a href="/." rel="nofollow">FENICE.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.css"><script type="text/javascript" src="/js/copycode.js" successtext="Copy Successed!"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

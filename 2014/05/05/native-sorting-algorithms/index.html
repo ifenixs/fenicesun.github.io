@@ -1,51 +1,70 @@
-extends base
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="fenice's blog"><title>native sorting algorithms | FENICE</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/clipboard/dist/clipboard.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.js"></script><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.css"><meta name="generator" content="Hexo 5.0.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">native sorting algorithms</h1><a id="logo" href="/.">FENICE</a><p class="description">Rock and opera fans</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> Home</i></a><a href="/archives/"><i class="fa fa-archive"> Archive</i></a><a href="/about/"><i class="fa fa-user"> About</i></a><a href="/atom.xml"><i class="fa fa-rss"> RSS</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">native sorting algorithms</h1><div class="post-meta">2014-05-05<span> | </span><span class="category"><a href="/categories/algorithm/">algorithm</a></span></div><div class="post-content"><h3 id="朴素排序方法"><a href="#朴素排序方法" class="headerlink" title="朴素排序方法"></a>朴素排序方法</h3><blockquote>
+<p>排序和搜索是程序设计中最常用的算法，他们看似作用简单，却都闪现着经典算法的智慧与光芒。</p>
+</blockquote>
+<p>排序算法的形式化定义：</p>
+<blockquote>
+<ul>
+<li>Input: n个数的序列：a1, a2, a3, …, an</li>
+</ul>
+</blockquote>
+<ul>
+<li>Output: n个数的排列：a1’, a2’, a3’, …, an’</li>
+</ul>
+<p>排序算法有很多种的分类方式，比如按数据存储形式分为内部排序和外部排序，按算法稳定性分为稳定排序和不稳定排序，按元素交换方式又分为插入排序、选择排序和交换排序等。<br>这里我根据排序算法不同的算法复杂度和算法思想将排序算法分为朴素排序、分治排序和复杂排序。</p>
+<p>这里作者定义平均复杂度&gt;= O(n^2)的排序方法为朴素排序，下面重点介绍冒泡排序、选择排序、插入排序这三种方法，用尽量本质的语言来描述他们的思想, 并给出C++代码。<br>朴素排序都是将序列分为已排序区和未排序区，通过不断地从未排序区筛选比较出最大／最小的元素，将其加入到已排序区中。最终未排序区为空时，整个序列达到有序。</p>
+<p>先给出三种排序方法的申明：</p>
+<pre><code>#ifndef ALGORITHM_SORTER_H
+#define ALGORITHM_SORTER_H
 
-block title
-  title= page.title + ' | ' + config.title
+#include &lt;functional&gt;
 
-block content
-  .post
-    h1.post-title= page.title
-    .post-meta= page.date.format('ll')
-      if page.categories.length > 0
-        span= ' | '
-        span.category
-          for category in page.categories.toArray()
-            a(href=url_for(category.path))= category.name
-      if theme.busuanzi == true
-        script(src='https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js', async)
-        span#busuanzi_container_page_pv= ' | '
-          span#busuanzi_value_page_pv
-          span= ' ' + __('Hits')
-    if theme.duoshuo
-      a.ds-thread-count(data-thread-key=page.path, href=url_for(page.path) + '#comments')
-    if theme.disqus
-      a.disqus-comment-count(data-disqus-identifier=page.path, href=url_for(page.path) + '#disqus_thread')
-    if page.toc
-      div(class='clear')
-        div(id='toc' class='toc-article')
-          div(class='toc-title')= __('contents')
-          != toc(page.content)
-    .post-content
-      != page.content
-    if theme.shareto == true
-      script(type='text/javascript', src=url_for(theme.js) + '/share.js' + '?v=' + theme.version, async)
-      a.article-share-link(data-url='#{page.permalink}', data-id='#{page._id}')= __('shareto')
-    include _partial/tag
-    include _partial/post_nav
-    if theme.duoshuo
-      div(class='ds-share flat' data-thread-key=page.path, data-title=page.title, data-url=page.permalink)
-         .ds-share-inline
-            ul.ds-share-icons-16
-              li(data-toggle='ds-share-icons-more')
-                a(class='ds-more' href='javascript:void(0);') 分享到：
-              li
-                a(class='ds-weibo' href='javascript:void(0);' data-service='weibo') 微博
-              li
-                a(class='ds-qzone' href='javascript:void(0);' data-service='qzone') QQ空间
-              li
-                a(class='ds-qqt' href='javascript:void(0);' data-service='qqt') 腾讯微博
-              li
-                a(class='ds-wechat' href='javascript:void(0);' data-service='wechat') 微信
-            .ds-share-icons-more
-    include _partial/comments
+template &lt;typename T&gt;
+class Sorter
+&amp;#123;
+public:
+    static void BubbleSort(T array[], int length, const std::function&lt;int(T, T)&gt; &amp;cmp);
+    static void SelectSort(T array[], int length, const std::function&lt;int(T, T)&gt; &amp;cmp);
+    static void InsertSort(T array[], int length, const std::function&lt;int(T, T)&gt; &amp;cmp);
+    static void Swap(T *a, T *b);
+&amp;#125;;</code></pre>
+<h4 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h4><p>特点：stable, in-place<br>思想：不停地将未排序区中的元素从高位向低位进行两两相邻元素的比较，将较大／较小元素进行交换，最终将当前未排序区中的最大／最小元素置换到已排序区中，直到未排序区为空。<br>平均复杂度：O(n^2)<br>最坏复杂度：O(n^2)<br>实现：两层循环不变式迭代，进行length-1趟冒泡，每趟冒泡将length ~ i +1之间的元素两两比较交换，将最大／最小的元素冒泡出来。</p>
+<pre><code>template &lt;typename T&gt;
+void Sorter&lt;T&gt;::BubbleSort(T *array, int length, const std::function&lt;int(T, T)&gt; &amp;cmp) &amp;#123;
+    for (int i = 0; i &lt; length; i++) &amp;#123;
+        for (int j = length; j &gt;= i + 1; j--) &amp;#123;
+            if (cmp(array[j], array[j - 1])) &amp;#123;
+                Swap(&amp;array[j], &amp;array[j - 1]);
+            &amp;#125;
+        &amp;#125;
+    &amp;#125;
+&amp;#125;</code></pre>
+<h4 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h4><p>特点：In-place, unstable<br>思想：不停地从未排序区中选择一个最大／最小的元素，并将这个元素与未排序区中的第一个元素交换，将其加入已排序区，迭代直至未排序区为空。<br>平均复杂度：O(n^2)<br>最坏复杂度：O(n^2)<br>实现：两轮循环不变式迭代，每次选择j+1~length之间最小／最大的元素与第j个元素交换，直至j = length-1</p>
+<pre><code>template &lt;typename T&gt;
+void Sorter&lt;T&gt;::SelectSort(T *array, int length, const std::function&lt;int(T, T)&gt; &amp;cmp) &amp;#123;
+    for (int j = 0; j &lt; length; j++) &amp;#123;
+        int index = j;
+        for (int i = j + 1; i &lt; length; i++) &amp;#123;
+            if (cmp(array[i], array[index])) &amp;#123;
+                index = i;
+            &amp;#125;
+        &amp;#125;
+        if (index != j) &amp;#123;
+            Swap(&amp;array[index], &amp;array[j]);
+        &amp;#125;
+    &amp;#125;
+&amp;#125;</code></pre>
+<h4 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h4><p>特点：stable，in-place<br>思想：每次将未排序区中的第一个元素插入到已排序区中的合适位置，直到未排序区为空<br>平均复杂度：O(n^2)<br>最坏复杂度：O(n^2)<br>实现：两轮循环不定式迭代，每次将移动array[i]到array[i+1]腾出空间将array[j]插入到前面合适的位置</p>
+<pre><code>template &lt;typename T&gt;
+void Sorter&lt;T&gt;::InsertSort(T *array, int length, const std::function&lt;int(T, T)&gt; &amp;cmp) &amp;#123;
+    for(int j = 1; j &lt; length; j++) &amp;#123;
+        T key = array[j];
+        int i = j - 1;
+        while (i &gt;= 0 &amp;&amp; cmp(key, array[i]) ) &amp;#123;
+            array[i + 1] = array[i];
+            i--;
+        &amp;#125;
+        array[i + 1] = key;
+    &amp;#125;
+&amp;#125;</code></pre>
+<p>上面的三种朴素的排序方法分别用了不同的未排序区选择与比较策略，不停地将未排序区选出的元素移动，加入到已排序区中。虽然思想上各不相同，却又有异曲同工之妙，这或许就是“朴素”的力量吧</p>
+</div><div class="tags"><a href="/tags/algorithm/"><i class="fa fa-tag"></i>algorithm</a><a href="/tags/sort/"><i class="fa fa-tag"></i>sort</a></div><div class="post-nav"><a class="pre" href="/2014/05/30/merge-sort-and-the-number-of-inversions/">merge sort and the number of inversions</a><a class="next" href="/2013/09/16/The-silent-night-in-shanghai/">The silent night in shanghai</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="https://fenicesun.com"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> Categories</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-Science/">Computer Science</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/algorithm/">algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/diary/">diary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/financial-mathematics/">financial mathematics</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/programming/">programming</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/reading-notes/">reading notes</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> Tags</i></div><div class="tagcloud"><a href="/tags/autumn/" style="font-size: 15px;">autumn</a> <a href="/tags/interest/" style="font-size: 15px;">interest</a> <a href="/tags/model/" style="font-size: 15px;">model</a> <a href="/tags/summer/" style="font-size: 15px;">summer</a> <a href="/tags/freedom/" style="font-size: 15px;">freedom</a> <a href="/tags/discipline/" style="font-size: 15px;">discipline</a> <a href="/tags/radio/" style="font-size: 15px;">radio</a> <a href="/tags/plot/" style="font-size: 15px;">plot</a> <a href="/tags/book/" style="font-size: 15px;">book</a> <a href="/tags/gcc/" style="font-size: 15px;">gcc</a> <a href="/tags/CSAPP/" style="font-size: 15px;">CSAPP</a> <a href="/tags/moon/" style="font-size: 15px;">moon</a> <a href="/tags/code/" style="font-size: 15px;">code</a> <a href="/tags/shanghai/" style="font-size: 15px;">shanghai</a> <a href="/tags/night/" style="font-size: 15px;">night</a> <a href="/tags/young/" style="font-size: 15px;">young</a> <a href="/tags/cpp/" style="font-size: 15px;">cpp</a> <a href="/tags/algorithm/" style="font-size: 15px;">algorithm</a> <a href="/tags/sort/" style="font-size: 15px;">sort</a> <a href="/tags/epoll/" style="font-size: 15px;">epoll</a> <a href="/tags/I-O/" style="font-size: 15px;">I/O</a> <a href="/tags/fork/" style="font-size: 15px;">fork</a> <a href="/tags/unix/" style="font-size: 15px;">unix</a> <a href="/tags/manjianghong/" style="font-size: 15px;">manjianghong</a> <a href="/tags/memory/" style="font-size: 15px;">memory</a> <a href="/tags/c/" style="font-size: 15px;">c</a> <a href="/tags/pointer/" style="font-size: 15px;">pointer</a> <a href="/tags/tail-call/" style="font-size: 15px;">tail call</a> <a href="/tags/recursive/" style="font-size: 15px;">recursive</a> <a href="/tags/segment-tree/" style="font-size: 15px;">segment tree</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/tools/" style="font-size: 15px;">tools</a> <a href="/tags/android/" style="font-size: 15px;">android</a> <a href="/tags/lambda/" style="font-size: 15px;">lambda</a> <a href="/tags/2017/" style="font-size: 15px;">2017</a> <a href="/tags/2018/" style="font-size: 15px;">2018</a> <a href="/tags/2019/" style="font-size: 15px;">2019</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> Recent</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/08/07/By-the-end-of-july-2020/">By the end of july 2020</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/true-code-one-s-complement-and-two-s-complement/">true code, one's complement and two's complement</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/07/CSAPP-notes-2-Representation-and-processing-of-information/">CSAPP notes 2: Representation and processing of information</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/29/Thoughts-about-Love-in-the-Time-of-Cholera/">Thoughts about Love in the Time of Cholera</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/12/CSAPP-notes-1-Roaming-in-computer-system/">CSAPP notes 1: Roaming in computer system</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/11/Recommended-CS-books-list-continuous-update/">Recommended CS books list[under continuous update]</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/27/Mourning-for-kobe-bryant/">Mourning for kobe bryant</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/20/The-annual-diary-from-2017-to-2019/">The annual diary from 2017 to 2019</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/18/The-commonly-used-compile-command-of-gcc/">The commonly used compile command of gcc</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/06/use-ListView-and-SimpleAdapter-to-create-list-items/">use ListView and SimpleAdapter to create list items</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> Links</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2020 <a href="/." rel="nofollow">FENICE.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.css"><script type="text/javascript" src="/js/copycode.js" successtext="Copy Successed!"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

@@ -1,51 +1,101 @@
-extends base
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="fenice's blog"><title>The annual diary from 2017 to 2019 | FENICE</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/clipboard/dist/clipboard.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.js"></script><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.css"><meta name="generator" content="Hexo 5.0.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">The annual diary from 2017 to 2019</h1><a id="logo" href="/.">FENICE</a><p class="description">Rock and opera fans</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> Home</i></a><a href="/archives/"><i class="fa fa-archive"> Archive</i></a><a href="/about/"><i class="fa fa-user"> About</i></a><a href="/atom.xml"><i class="fa fa-rss"> RSS</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">The annual diary from 2017 to 2019</h1><div class="post-meta">2020-01-20<span> | </span><span class="category"><a href="/categories/diary/">diary</a></span></div><div class="post-content"><h3 id="年记-2017-to-2019"><a href="#年记-2017-to-2019" class="headerlink" title="年记 2017 to 2019"></a>年记 2017 to 2019</h3><br/>
 
-block title
-  title= page.title + ' | ' + config.title
+<p>距离上次更新博客已经过去了两年。不知是拖延症日益严重还是这个年纪的时间过的愈来愈快，计划完全更不上变化。在接近30岁的关口，记忆力也逐渐不如从前，好几次催促自己拾起写博客的记录习惯，却又在第二天的繁忙中忘记。最终还是咬牙打开了hexo，尝试着把这两年的生活记录一下。</p>
 
-block content
-  .post
-    h1.post-title= page.title
-    .post-meta= page.date.format('ll')
-      if page.categories.length > 0
-        span= ' | '
-        span.category
-          for category in page.categories.toArray()
-            a(href=url_for(category.path))= category.name
-      if theme.busuanzi == true
-        script(src='https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js', async)
-        span#busuanzi_container_page_pv= ' | '
-          span#busuanzi_value_page_pv
-          span= ' ' + __('Hits')
-    if theme.duoshuo
-      a.ds-thread-count(data-thread-key=page.path, href=url_for(page.path) + '#comments')
-    if theme.disqus
-      a.disqus-comment-count(data-disqus-identifier=page.path, href=url_for(page.path) + '#disqus_thread')
-    if page.toc
-      div(class='clear')
-        div(id='toc' class='toc-article')
-          div(class='toc-title')= __('contents')
-          != toc(page.content)
-    .post-content
-      != page.content
-    if theme.shareto == true
-      script(type='text/javascript', src=url_for(theme.js) + '/share.js' + '?v=' + theme.version, async)
-      a.article-share-link(data-url='#{page.permalink}', data-id='#{page._id}')= __('shareto')
-    include _partial/tag
-    include _partial/post_nav
-    if theme.duoshuo
-      div(class='ds-share flat' data-thread-key=page.path, data-title=page.title, data-url=page.permalink)
-         .ds-share-inline
-            ul.ds-share-icons-16
-              li(data-toggle='ds-share-icons-more')
-                a(class='ds-more' href='javascript:void(0);') 分享到：
-              li
-                a(class='ds-weibo' href='javascript:void(0);' data-service='weibo') 微博
-              li
-                a(class='ds-qzone' href='javascript:void(0);' data-service='qzone') QQ空间
-              li
-                a(class='ds-qqt' href='javascript:void(0);' data-service='qqt') 腾讯微博
-              li
-                a(class='ds-wechat' href='javascript:void(0);' data-service='wechat') 微信
-            .ds-share-icons-more
-    include _partial/comments
+<br/>
+
+<h4 id="2017"><a href="#2017" class="headerlink" title="2017"></a>2017</h4><p>2017是我的本命年，这一年总的来说过的有点难。</p>
+
+<h5 id="关于工作和职业"><a href="#关于工作和职业" class="headerlink" title="关于工作和职业"></a>关于工作和职业</h5><p>那时已经是毕业在腾讯工作的第2.5年个年头，从实习开始就在OMG的广告平台产品部，主要工作是处理在线广告下单投放上报后的各种数据，处理完后推送给下游各相关业务方。实际的工作内容大概就是写些python/php脚本，处理完文本数据后从一个db导到另一个db，每个脚本里大概是个几百行的sql外加后处理，数据处理完顺便再维护一下可视化web系统。</p>
+
+<p>当时整个部门的技术栈陈旧不堪，这能写100页的PPT来控诉。我后来维护的主要系统（灯塔）因为拷贝框架代码连namespace都沿用了07年的qqlive，而qqlive那个年代我还是个初中生。部门的总监和leader们几乎没有看出有啥技术追求，所有的会议和培训上无一例外地在强调业务业务还是业务。对在线广告业务的不感冒也带入到了工作中，基本就是当一天和尚撞一天钟，写完leader安排的代码以外别无其它追求，同时又因为16年那场病的疲惫，也几乎顾不上自己的职业规划，甚至在17年年中谈绩效的时候，我还在PDI里写了“更熟悉业务”的目标，那时实在是不够职业化。</p>
+
+<p>本来想着可以日子先这样过着，毕竟刚工作也不算久，等到病愈再做打算。但是容易混的日子总是不长久，一季度部门架构调整后，整个部门最难搞的产品经理MC跑到了灯塔，开启我后面长达大半年的噩梦。之前只是和建超（我们组同事）吃饭的时候有所耳闻，听闻她刚来一年多就能挤走俩个人，是个狠角色。果不其然，很开就开始了和这位之前来自百事通体育，再之前在美帝担任NFL记者的“资深”媒体行业产品经理的撕逼大战，其骚操作包括：绕过leader提需求/发给leader,开发(me),测试不一样的需求和测试文档/绩效威胁/周末及凌晨电话轰炸，完全没有互联网产品的技术实现概念，做了一堆无用的产品功能，直到周杰入职顶替了她才好转。</p>
+
+<p>那年我还带着很重的学生气，不懂得如何与这样的同事沟通周旋，当时的leader和我同样的内向，也没能给我提供一些这方面帮助，最后无奈地不断被MC拉进漩涡，无数一开始就没有意义的需求，无数无意义的加班，每天开会争吵到人身攻击，永远都是疲惫不堪，回家靠烟来平息下情绪再休息。</p>
+
+<p>个人的技术成长上这一年也没有什么突出的进展，15/16年还忙里偷闲偷学了很多系统级编程的知识，17年每天回家后都很少打开vim了。倒是这一年零零散散学了些机器学习的知识，粗略地看了西瓜书和李航的统计学习原理，参加了腾讯内部的一个AI预测比赛，最终赢了桶巨型啤酒，六个人喝了一晚才喝完。另外一直想做quant对金工这个行业也多了点了解。</p>
+
+<h5 id="关于生活"><a href="#关于生活" class="headerlink" title="关于生活"></a>关于生活</h5><p>3，4月份的时候去医院例行检查，终于主要指标全都正常，16年初开始整整病了一整年，那一个月非常的开心，拿到报告的周末愉快地请在上海帮助过我很多的怡婷学姐吃了顿竹若。3月初从九亭城家公寓搬到了泗泾金港花园，城家公寓是我在上海住过的最舒适的商住公寓，没有之一，可惜房租/停车费/电费加一起实在太贵，加上每月的车贷，每月结余仅剩4000，不得已搬到了泗泾。金港花园环境倒是不错，只是房东的隔断和排烟做的有问题，主卧自带卫生间的下水道都没有U型蓄水，总是有些奇怪的味道，但是鉴于价格和空间还有80元一月的停车位，也就凑合住着。时常倚在二楼的阳台上抽着烟，晒着太阳，看着大河对面的别墅，想着这漂泊的生活，做着盖茨比的梦。</p>
+
+<p> 5月和我们大学宿舍/136宿舍的同学一起去了趟舟山，去了海边，吃了海鲜，非常的开心，除了普陀山没啥意思。好景不长，过了一两个月，肠胃消化越来越差，经常吃东西消化不了。去医院做了胃镜之后发现胃底有糜烂性胃炎，最终诊断是幽门螺旋杆菌超标，吃了两周的天量抗生素后开始好转，不过消化功能的恢复一直到后面一年多才恢复如初。胃不舒服的时候真是痛苦，吃了饭不消化，完全不能碰辛辣的食物，每天都靠粥面续命，生病的时候才永远觉得身体最重要。</p>
+
+<p>平日的生活主要是公司、住的地方两点一线，娱乐和运动主要以松江大学城为中心，每个不下雨的周末都是和齐行君一起去上外打一场球，随后在大学城的美食广场吃顿10元一碗的超值土耳其烤肉饭。</p>
+
+<p>这一年生活平淡，工作糟心，身体崩溃，感情空白无着落，逐渐萌生了辞职考研的念头，本来一直就对金融工程很有兴趣，在这个焦虑的年纪又拼命想赚钱，想法就一天一天坚定了下来，年底的时候基本上已经做了来年离职的决定。</p>
+
+
+<br/>
+
+<h4 id="2018"><a href="#2018" class="headerlink" title="2018"></a>2018</h4><p>2018是家里蹲的一年，总来的讲是个考研失败，但是身心恢复的gap year</p>
+
+<h5 id="关于离职和考研"><a href="#关于离职和考研" class="headerlink" title="关于离职和考研"></a>关于离职和考研</h5><p>2018年过完春节我就向leader bugzhu提出了离职，bug和los也没有挽留什么，最后交接工作一个月的划水是在腾讯最快乐的时光。离职前和eason/老王还有我们组同事吃了饭喝了酒，和杰西卡面谈完，办完离职手续就离开了呆了4年的腾云大厦。后面父亲从老家过来，帮我用一天时间收拾好东西就暂时告别了上海。</p>
+
+<p>目标院校从有考研想法的那天就很确定了，作为一个江苏人多少都会有点南大情节，这也成了考研失败的第一个错因。考研的院校选择与专业课强相关，通常来说，跨专业考试应当优先选择专业课试题风格更加适合自己、偏客观、本校生倾向小的院校，哪怕竞争激烈。相比南大的主观题风格，应当优先选择上财/中科大/外经贸。而南京大学管理科学学院的金融工程只是挂着金工招牌的金融学，试题都是主观题为主，论述题多于计算，院校选择和跨专业的信息闭塞导致了专业课的复习缺少了针对性，结果考试结果出来后专业课毫无疑问的拖了后腿。</p>
+
+<p>四月初回家后，休息了一周后就开始了考研复习。人的自制力在独处的时候真是很难发挥出来，难怪古人就把慎独当成一种高级修养。在家复习的初衷是不需要租房可以省钱，另外吃喝住可以更加舒适一些。每天的生活就是7点起床，用一小时洗漱吃早饭泡咖啡，8点钟准时开始一天的复习，累了可以间歇性的在家里放松一下。下午2点继续复习直到5点再去锻炼，晚饭后大约7点半开始晚间的复习直到12点睡觉。其实当初完全可以在松江大学城or南大附近租个小房间，每天去学校图书馆复习可能会有更高的效率，有利于保持一个更好的复习节奏。</p>
+
+<p>从4月份到8月份，每天就是背单词/复习数学/学习专业课的循环。9月份开始重心转向刷题，当中还有个插曲，南大9月份临时把数学三换成了经济学联考396，一下子打乱了复习节奏。本可以把学校换成中科大，但还是甩不开南大情节，硬着头皮继续战。这段时间数学英语明显得到了提升找到了感觉，尤其是英语阅读，模拟卷基本都可以只错一个。唯一心里没底的就是专业课，因为跨专业前期对专业套路的不了解，导致后期基本战略放弃公司金融这部分。</p>
+
+<p>10月11月考研报名确认，期间刷题背书，时间过的很快。12月25号在盐城工学院参加了考试，第一天的英语政治还不错，第二天有两个失误，1是经济学联考的大作文没写完，损失10分，2是专业课的计算题考到了公司金融的计算，损失10分。考完试去哥哥家玩了几天，2018正式结束。</p>
+
+<h5 id="关于生活-1"><a href="#关于生活-1" class="headerlink" title="关于生活"></a>关于生活</h5><p>这一年的生活总体上单调平淡。每天都是很规律的节奏，身体也得到了很好的休养，前一年的胃病在这一年算是彻底康复了，胃口也越来越好。</p>
+
+<p>娱乐活动很少，也就每天吃饭休息时会去看看微博/知乎，每隔俩月和哥哥一起开一次卡丁车。还有每天运动一小时，除此以外几乎都在看书。</p>
+
+<p>另外一件事情是这一年和严老师恢复了联系。自从16年4月份她找到新男朋友以后，我就再也没有联系过她，屏蔽了她的朋友圈，取关了她的微博和其它社交网络。本来以为这辈子就这样永不相见了，没想到孽缘未尽，18年元旦的时候她在魔都老乡群里主动要求搭车回建湖老家。得知她又分了手，具体发生什么我也不清楚，也不想知道。一年半没有联系，她是比当初成熟了一些，没有再聊过往的那些事，她过的好像也没有从前快乐。考研的这一年里，我们时不时地有些交流，她想考在职的研究生，有时候碰上总坑她的傻叉同事，有时候想买房，我们交换些彼此的喜怒哀乐，互相支持，就像从前一样。18年7月份的时候还在台风天去上海看了她一次，一起吃了越南料理，吃了竹若，她还是像以前一样地可爱，傲娇，一样的不喜欢我。把她送到了武宁路的路口，我就一路不停地上了高架开回了家。细数惭愧，不懂事的年纪里伤她太多，只愿能尽量弥补吧</p>
+
+<p>2018就这样单调的过去了，当然最终的结果也不是很理想。但人生路那么长，总要停着歇一下不是么，恢复下身心再继续前进，也算是一个普普通通的gap year。</p>
+
+
+<br/>
+
+<h4 id="2019"><a href="#2019" class="headerlink" title="2019"></a>2019</h4><p>2019充满了变动和复杂，是继2015后收获最多的一年。</p>
+
+<h5 id="关于调剂、找工作和工作"><a href="#关于调剂、找工作和工作" class="headerlink" title="关于调剂、找工作和工作"></a>关于调剂、找工作和工作</h5><p>2019年的元旦，我独自一人去了趟苏州、杭州和上海。放松心情见完老同学后就回到家里过年，年后两手准备，一边准备复试等待分数，另一边捡起C++如果考不上就再去工作。
+</p>
+<p>2月底分数出来，总分391（121+118+82+70），果然专业课和经济学联考的两门拖了后腿，最终的分数线是395。于是立马放弃幻想准备调剂，联系了母校苏州大学，上海社科院还有一些其他学校。调剂是僧多粥少，很多学校都在抢夺985落榜生源，其他学校都由于非985出身在预调剂这个环节就被筛选下来。国家线公布后，苏大回了我的邮件，大意就是你是个优秀的学生，但是今年上线人数已经满了所以不接受调剂生。上海社科院倒是说还有机会，他们第一年开设金融硕士专业。</p>
+<p>3月初国家线出来，感觉老家信息过于闭塞，想出去了解信息，不行就开始找工作。正好蔡玉家租了一个两室一厅有一个空房间，于是我就带上东西再回到上海，住到了蔡玉家中科路2500弄。刚开始几天一直在等待上海社科院的调剂信息，每天在浦东图书馆复习专业课和C++。巧的是，我的高中同学左承鹏正好也住在中科路附近，他研究生刚毕业在盛大做游戏设计工作。</p>
+<p>又过了一周，社科院那里传来消息，调剂只收一志愿复旦的落榜生，调剂这条路彻底不通，上外贸和兰州大学这样的学校对于金融专业不如不上。既然这样，就正式开始找工作，过完清明节的那一周投了第一批简历：分别是中金所技术公司，中信建投交易系统开发，平安量化，阅文集团，商汤科技，闪策科技，博海基金，以及一堆小私募，因为当时对quant这个行业还是心存向往，所以这个阶段以量化和fintech的公司为主。</p>
+<p>
+大概又过了一周，开始收到密集的面试邀请和拒信。先是闪策打电话来问愿不愿转做运营开发，我拒绝了然后被拒，平安量化被无视，中金所和中信建投都收到了邀请，商汤没有音讯。首先是中金所，中金所面试了三轮，第一面是电话面，几个技术轮番问，问的基本都是C++那套技术及socket/并发编程/db相关/设计模式的问题，由于我的本科毕业设计就是一个证券撮合引擎，有过相关系统设计经验，所以整个过程聊天愉快。第二轮去了浦电路中金所技术公司，那天的面试很夸张，不知是不是国企的风格，四个面试官围坐在我的对面，先是一些技术问题，然后对着我的简历夹问了很多软性的问题，如“在腾讯让你最有成就感的事情是什么”，“用三个词描述你的性格”，这些问题每个都搞得我很懵逼，想来在腾讯那两年多真的没有做出啥让自己有成就感的东西，还一定程度上磨灭了自己的自信，这些问题基本都答的有些磕磕绊绊，最后还做了一份笔试题，算上来总共在中金所呆了3个半小时，是人生最长的一次面试。离开的时候夕阳西下，迷失在陆家嘴的高楼里，在全家喝了一杯咖啡，满心希望今后能来这里。第三轮面试主要是中金所的一些领导和行政，主要问了家庭和价值观方面的问题，很快就结束了。 第二个公司是主动打电话找上来的宏景智驾，一个刚成立的做自动驾驶的初创企业。第一面在桂林路氪空间，面试官是一个前百度员工，主要问了一些C++开发相关的内容和之前的工作经历，然后让我手写一段代码。关于题目的意思我就理解错了两次，最终代码写的其实也有问题，但是面试官觉得我功底还不错，就约我下一周去嘉定办公室面试。第二轮面试是VP面，VP应该是算法出身的，对开发没有太多深入了解，问题主要还是围绕我之前的工作经历以及我自己的兴趣点，我讲了自身的兴趣在于体系结构和算法工程化，还算愉快的结束了这轮面试，后续HR面就是讲讲薪资期望之类的。
+</p>
+
+<p>有了一些面试经验后，对私募的工作内容和运作方式也有一点理解，这个行业winner takes all，如果不在头部券商或者基金很难有自己的发展空间，而且技术点非常的固定成熟，无非就是接交易所，kernel by pass，写回测这套事情，已经没有太多新意，于是打算回到互联网。后面投递的简历都是以互联网公司为主，字节跳动，拼多多，Ucloud以及心动网络。字节跳动全都是视频远程面试，且面试了多次。一面抖音后台挂（真的难），后面简历被广告业务给捞出来，连续面试了三轮，但当时我的简历上太头铁，非要写C++，结果对面都是java和python的岗位，最终以面试4轮简历被标记为岗位不匹配结束。拼多多就比较直接了，一个下午面试三轮全部解决，愿意转java就可以发offer，并且直接说明工作强度是11 11 6。后面是Ucloud，没有笔试没有代码，和他们技术leader聊的还算愉快，但是被告知他们目前hc比较紧，想招一些有分布式存储开发经验的人，但可以推荐到其他岗位，由于对他们其他云服务岗位兴趣不大，遂拒之。最后一个是心动网络，HR小哥态度很好，去面试还送了礼物。岗位是AILab 深度学习开发，面试感受相当不好，以我面试过程中的感觉来看，面试官技术水平应该一般，但是装x水平太绝了，处处都在吹虚自己。面试算法题基本都是leetcode前100里的轻松水过，deep learning我不懂有些问题没答出来。最终也给了offer，但是开出的价格比上面宏景智驾都少了10万，加上之前网络上传闻心动网络上海人扎堆抱团，部门之间的氛围和风气很迷，也拒之。</p>
+
+<p>4月底的时候对比了一下手里的几个offer，最终选择了宏景智驾。原因一是钱给的还行，二是岗位是自己想做的C++开发，还有就是在创业公司可能有更多的机会。长达一个月的找工作旅程正式结束。</p>
+
+<p>5月初在嘉定租了房子，过了几天就正式入职了。入职后发现公司其实还不错，有一大趟博士，在这儿见到的清华的同事比在腾讯见到的都多。小公司的节奏很快，只留一两周的时间让熟悉框架代码，直接给任务开始开发。我来的时候恰逢公司的各个子模块系统移植到公司自己的硬件控制器ADCU上，需要有一个collector模块把ADCU上各项数据发送给HMI，于是这个模块就交给我开发，初始阶段还是有点困难，毕竟对这套工具链和框架不是特别熟悉，每天下班后还得自己琢磨及debug。不过一个月后就没有啥问题了，交给我的任务顺利完成并验证无误。</p>
+
+<p>6月去江淮技术中心出了趟差，深深觉得汽车作为一个传统行业，不管是理念还是氛围都比互联网落后太多太多。说到底汽车解决的仍然只是单向的实际的人的出行问题，而互联网解决的是并发的信息的快速传递问题，后者对速度和效率的要求永远要更快更高。这两个月还狂补了很多C++知识，读完了《深度搜索C++对象模型》，《Effective modern C++》</p>
+
+<p>
+从7月到10月一直在做标定工具相关的开发，由于前期对需求的理解，以及与BSW那里的沟通，这个开发比预期delay了不少。主要工作是calibration-manager,calibration-importer的开发，利用redis作为一个在线存储介质，把整个系统中需要动态变化的标定值从配置文件全部迁移到数据库，通过XCP协议实现动态对标定值的修改。这个系统前期由老板设计，我来编码，其实设计的部分是有些问题的，导致后续的开发一直在填坑。这个打算在2020年Q1 做一次重构，即2.0版本。但是最终，总算是打通了从INCA->redis->算法模块这个链路，功能全部实现。
+</p>
+
+<p>10月到12月的主要工作集中在supervisor的开发上，由于现在的自动驾驶软件各模块都是自己跑自己的，没有统一的监控和管理。于是开发了这一套管理软件，supervisor包括后台服务进程supervisord和一个命令行工具supervisorctl。主要的功能其实是launcher和monitor，launcer这部分用来对所有的模块进行监控，启动，停止，获取状态，以及捕捉子模块进程退出信号，monitor用来对各个模块的状态进行监控，子模块是否coredump，loop是否超时，算法输出是否异常等等。过年之前这套服务已经被我部署到试验车上并成功运行。</p>
+
+<p>年终的绩效考核是优秀，没有拿到outstanding是有点可惜。不过鉴于今年的动荡，还算是收获颇丰，闲余时间看了好几本优秀的书，包括《设计模式》，《编码》（5星推荐），《许三观卖血记》（生活不易），《代码整洁之道》</p>
+
+<p>
+对于今后的打算，2020年的规划和目标是进一步阅读计算机经典著作，《深入理解计算机系统》，《oranges' 一个操作系统的实现》，《TCP/IP详解卷2》以及《modu库设计》，《Effective c++》，《More effective c++》，考完系统分析师和系统架构师。下半年尽量能开始刷prml，了解深度学习，跟紧时代的趋势。
+</p>
+
+<h5 id="关于生活-2"><a href="#关于生活-2" class="headerlink" title="关于生活"></a>关于生活</h5><p>2019这一年的生活跨度很大，是继2014以后最丰富多变多彩的一年。</p>
+
+<p>元旦独自一人去杭州玩了一趟，那几天阴雨濛濛，西湖景色格外别致，从湖边走过像是观识一幅幅水墨画。一个人绕着西湖走了一圈，烟雨的江南石板路，摇荡的小船又让我想起了苏州，想起天赐庄的那些日子。时间一点都不留情，转眼这些珍贵的往昔岁月全都封存进了记忆。</p>
+
+<p>准备调剂和找工作面试的日子里，去的最多的还是浦东图书馆。浦图真是我去过的图书馆中的NO.1，带着电脑和书过去，既安静又安全，每天都有很多好学的人在这里奋进，自己也深受感染，还可以安心的把电脑放在桌子上出去吃个饭，地下一层甚至还有个食堂，我对浦图的评价远远好于网红嘉定图书馆。这一年和左承鹏以及rachel聚的最多，经常和小左在周末带上相机，去上海的各地闲逛，外滩，景点，索尼店，耳机店，各种美食店，在他乡碰上自己青年时代直到现在的老同桌和知己，真是见幸运的事情。rachel这一年也经历了很多，买房，装修，各种比赛考试，也是收获满满。她爸妈给安排了好几场相亲，不过都没什么下文。想多陪她一天，一月，一年，尽管不会有结果，还是要珍惜还能一起说话的日子，给予一些温暖和支持。等那一天真的到来，我也会潇洒的挥手祝福，然后再也不见。青春的岁月总是过的那么快又留不住，脑海中停留的还是高中的青涩和大学的意气，却一晃30岁就在眼前了。</p>
+
+<p>工作后搬到了嘉定，生活单调起来。6月份买了心念已久的任天堂switch和塞尔达传说，这真是这辈子玩过的最牛逼的游戏，8月份最沉迷的时候，每到周末，都要在游戏机前坐上个16，7小时，除了吃饭睡觉就是在坐着打游戏，不知外面白天还是黑夜，还好用了两个月顺利通关再二手出掉。</p>
+
+<p>十月份由于我们组缺人手，就把我的大学同班同学朱洋招了过来，现在在lidar组做开发。然后我正好和他合租到了一起，在自如上换到了一个lofter，朱洋每周都回苏州的家里，所以每到周末我都独享这两层的lofter，住的相当舒适。</p>
+
+<p>
+年末的时候迷上了hifi设备，起因是我哥从淘宝收了几个79元的jawbone minibox，音质大约相当于bose mini，性价比超群，然加了个胆机功放后音质提升幅度很大，就彻底入坑了。后面把jawbone卖了以后换了套presonus e3.5监听音箱，进一步提升。2020年打算把吉他抱回来重新学门乐器，顺便把乐理基础学好，还有时间的话再研究下电子电路和扬声器设计。
+</p>
+
+<p>总的来说2019这一年还是很满足，尽管考研失败，但身体健康，家人平安，收获和体验很多，基本令自己满意。</p>
+
+<p>就先写到这里啦</p>
+</div><div class="tags"><a href="/tags/2017/"><i class="fa fa-tag"></i>2017</a><a href="/tags/2018/"><i class="fa fa-tag"></i>2018</a><a href="/tags/2019/"><i class="fa fa-tag"></i>2019</a></div><div class="post-nav"><a class="pre" href="/2020/01/27/Mourning-for-kobe-bryant/">Mourning for kobe bryant</a><a class="next" href="/2019/04/18/The-commonly-used-compile-command-of-gcc/">The commonly used compile command of gcc</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="https://fenicesun.com"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> Categories</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-Science/">Computer Science</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/algorithm/">algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/diary/">diary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/financial-mathematics/">financial mathematics</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/programming/">programming</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/reading-notes/">reading notes</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> Tags</i></div><div class="tagcloud"><a href="/tags/autumn/" style="font-size: 15px;">autumn</a> <a href="/tags/interest/" style="font-size: 15px;">interest</a> <a href="/tags/model/" style="font-size: 15px;">model</a> <a href="/tags/summer/" style="font-size: 15px;">summer</a> <a href="/tags/freedom/" style="font-size: 15px;">freedom</a> <a href="/tags/discipline/" style="font-size: 15px;">discipline</a> <a href="/tags/radio/" style="font-size: 15px;">radio</a> <a href="/tags/plot/" style="font-size: 15px;">plot</a> <a href="/tags/book/" style="font-size: 15px;">book</a> <a href="/tags/gcc/" style="font-size: 15px;">gcc</a> <a href="/tags/CSAPP/" style="font-size: 15px;">CSAPP</a> <a href="/tags/moon/" style="font-size: 15px;">moon</a> <a href="/tags/code/" style="font-size: 15px;">code</a> <a href="/tags/shanghai/" style="font-size: 15px;">shanghai</a> <a href="/tags/night/" style="font-size: 15px;">night</a> <a href="/tags/young/" style="font-size: 15px;">young</a> <a href="/tags/cpp/" style="font-size: 15px;">cpp</a> <a href="/tags/algorithm/" style="font-size: 15px;">algorithm</a> <a href="/tags/sort/" style="font-size: 15px;">sort</a> <a href="/tags/epoll/" style="font-size: 15px;">epoll</a> <a href="/tags/I-O/" style="font-size: 15px;">I/O</a> <a href="/tags/fork/" style="font-size: 15px;">fork</a> <a href="/tags/unix/" style="font-size: 15px;">unix</a> <a href="/tags/manjianghong/" style="font-size: 15px;">manjianghong</a> <a href="/tags/memory/" style="font-size: 15px;">memory</a> <a href="/tags/c/" style="font-size: 15px;">c</a> <a href="/tags/pointer/" style="font-size: 15px;">pointer</a> <a href="/tags/tail-call/" style="font-size: 15px;">tail call</a> <a href="/tags/recursive/" style="font-size: 15px;">recursive</a> <a href="/tags/segment-tree/" style="font-size: 15px;">segment tree</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/tools/" style="font-size: 15px;">tools</a> <a href="/tags/android/" style="font-size: 15px;">android</a> <a href="/tags/lambda/" style="font-size: 15px;">lambda</a> <a href="/tags/2017/" style="font-size: 15px;">2017</a> <a href="/tags/2018/" style="font-size: 15px;">2018</a> <a href="/tags/2019/" style="font-size: 15px;">2019</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> Recent</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/08/07/By-the-end-of-july-2020/">By the end of july 2020</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/true-code-one-s-complement-and-two-s-complement/">true code, one's complement and two's complement</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/07/CSAPP-notes-2-Representation-and-processing-of-information/">CSAPP notes 2: Representation and processing of information</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/29/Thoughts-about-Love-in-the-Time-of-Cholera/">Thoughts about Love in the Time of Cholera</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/12/CSAPP-notes-1-Roaming-in-computer-system/">CSAPP notes 1: Roaming in computer system</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/11/Recommended-CS-books-list-continuous-update/">Recommended CS books list[under continuous update]</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/27/Mourning-for-kobe-bryant/">Mourning for kobe bryant</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/20/The-annual-diary-from-2017-to-2019/">The annual diary from 2017 to 2019</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/18/The-commonly-used-compile-command-of-gcc/">The commonly used compile command of gcc</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/06/use-ListView-and-SimpleAdapter-to-create-list-items/">use ListView and SimpleAdapter to create list items</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> Links</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2020 <a href="/." rel="nofollow">FENICE.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.css"><script type="text/javascript" src="/js/copycode.js" successtext="Copy Successed!"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

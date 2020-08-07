@@ -1,51 +1,62 @@
-extends base
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="fenice's blog"><title>use Anaconda to manage your python environments | FENICE</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/clipboard/dist/clipboard.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.js"></script><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.css"><meta name="generator" content="Hexo 5.0.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">use Anaconda to manage your python environments</h1><a id="logo" href="/.">FENICE</a><p class="description">Rock and opera fans</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> Home</i></a><a href="/archives/"><i class="fa fa-archive"> Archive</i></a><a href="/about/"><i class="fa fa-user"> About</i></a><a href="/atom.xml"><i class="fa fa-rss"> RSS</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">use Anaconda to manage your python environments</h1><div class="post-meta">2018-01-18<span> | </span><span class="category"><a href="/categories/programming/">programming</a></span></div><div class="post-content"><h3 id="使用Anaconda来管理python环境"><a href="#使用Anaconda来管理python环境" class="headerlink" title="使用Anaconda来管理python环境"></a>使用Anaconda来管理python环境</h3><blockquote>
+<p>Anaconda是一个开源的用于科学计算的python发行版，其中包含了conda,python等180多个科学计算包及其依赖项，提供了包管理和环境管理功能，可以方便地解决多版本python并存、切换及第三方包安装更新问题。Anaconda使用工具conda来进行不同python environment及package的管理。</p>
+</blockquote>
+<h4 id="选择conda"><a href="#选择conda" class="headerlink" title="选择conda"></a>选择conda</h4><blockquote>
+<p>相比与virtualenv等虚拟环境管理工具，conda管理实际的python环境，使用conda可以下载安装不同版本的python及在此环境下所需要用到的package，不同的python环境相互隔离，不会相互影响，每个环境都有独立版本的python解释器及独立的packages。conda使我们可以在不同的环境之间进行快速切换，并可以对每个环境及环境中的package进行安装、升级、删除。conda将几乎所有的工具、第三方包都当作package对待，包括python和conda自身。</p>
+</blockquote>
+<h4 id="使用conda进行环境管理"><a href="#使用conda进行环境管理" class="headerlink" title="使用conda进行环境管理"></a>使用conda进行环境管理</h4><pre><code># 创建一个名为tensorflow的环境，指定python版本是3.6
+conda create --name tensorflow python=3.6
 
-block title
-  title= page.title + ' | ' + config.title
+# 安装好后，使用activate激活环境
+activate tensorflow
+source activate tensorflow # for Linux &amp; Mac
+# 激活后，会发现terminal多了tensorflow的字样，实际上，系统此时把PATH变更到当前python版本
 
-block content
-  .post
-    h1.post-title= page.title
-    .post-meta= page.date.format('ll')
-      if page.categories.length > 0
-        span= ' | '
-        span.category
-          for category in page.categories.toArray()
-            a(href=url_for(category.path))= category.name
-      if theme.busuanzi == true
-        script(src='https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js', async)
-        span#busuanzi_container_page_pv= ' | '
-          span#busuanzi_value_page_pv
-          span= ' ' + __('Hits')
-    if theme.duoshuo
-      a.ds-thread-count(data-thread-key=page.path, href=url_for(page.path) + '#comments')
-    if theme.disqus
-      a.disqus-comment-count(data-disqus-identifier=page.path, href=url_for(page.path) + '#disqus_thread')
-    if page.toc
-      div(class='clear')
-        div(id='toc' class='toc-article')
-          div(class='toc-title')= __('contents')
-          != toc(page.content)
-    .post-content
-      != page.content
-    if theme.shareto == true
-      script(type='text/javascript', src=url_for(theme.js) + '/share.js' + '?v=' + theme.version, async)
-      a.article-share-link(data-url='#{page.permalink}', data-id='#{page._id}')= __('shareto')
-    include _partial/tag
-    include _partial/post_nav
-    if theme.duoshuo
-      div(class='ds-share flat' data-thread-key=page.path, data-title=page.title, data-url=page.permalink)
-         .ds-share-inline
-            ul.ds-share-icons-16
-              li(data-toggle='ds-share-icons-more')
-                a(class='ds-more' href='javascript:void(0);') 分享到：
-              li
-                a(class='ds-weibo' href='javascript:void(0);' data-service='weibo') 微博
-              li
-                a(class='ds-qzone' href='javascript:void(0);' data-service='qzone') QQ空间
-              li
-                a(class='ds-qqt' href='javascript:void(0);' data-service='qqt') 腾讯微博
-              li
-                a(class='ds-wechat' href='javascript:void(0);' data-service='wechat') 微信
-            .ds-share-icons-more
-    include _partial/comments
+# 此时，查看python版本，会发现已经切换到py3.6 
+python --version
+
+# 如果想返回默认的python环境
+deactivate tensorflow
+source deactivate tensorflow # for Linux &amp; Mac
+# 删除已有的python环境
+conda remove --name tensorflow -all</code></pre>
+<p>用户安装不同的python环境都会被放在anconda目录的envs子目录下，或者使用</p>
+<pre><code>conda info -e</code></pre>
+<p>查看已安装的环境，当前被激活的环境会显示星号或括号</p>
+<h4 id="使用conda进行包管理"><a href="#使用conda进行包管理" class="headerlink" title="使用conda进行包管理"></a>使用conda进行包管理</h4><p>使用conda进行包管理与使用pip类似，若要安装tensorflow:</p>
+<pre><code># 安装tensorflow
+conda install tensorflow
+# 查看已安装的packages
+conda list</code></pre>
+<p>包管理常用操作：</p>
+<pre><code># 查看某个指定环境的已安装包
+conda list -n tensorflow
+
+# 查找package信息
+conda search numpy
+
+# 安装package
+conda install -n tensorflow numpy
+# 若不用-n指定环境名，则被安装在当前激活的环境
+
+# 更新package
+conda update -n tensorflow numpy
+
+# 删除package
+conda remove -n tensorflow numpy</code></pre>
+<p>由于conda将conda、python都视为package，因此，可以使用conda来管理conda和python的版本，例如：</p>
+<pre><code># 更新conda, 保持conda最新
+conda update conda
+
+# 更新anaconda
+conda update anaconda
+
+# 更新python
+conda update python</code></pre>
+<p>由于anaconda.org服务器访问较慢，可以设置国内的镜像来下载安装package:</p>
+<pre><code># 添加anaconda的tingshua镜像
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+
+# 设置搜索时显示通道地址
+conda config --set show_channel_urls yes</code></pre>
+</div><div class="tags"><a href="/tags/python/"><i class="fa fa-tag"></i>python</a><a href="/tags/tools/"><i class="fa fa-tag"></i>tools</a></div><div class="post-nav"><a class="pre" href="/2018/03/01/About-the-continuously-compounding-interest-model/">About the continuously compound interest model</a><a class="next" href="/2017/11/06/2017autumn/">2017Autumn</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="https://fenicesun.com"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> Categories</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-Science/">Computer Science</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/algorithm/">algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/diary/">diary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/financial-mathematics/">financial mathematics</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/programming/">programming</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/reading-notes/">reading notes</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> Tags</i></div><div class="tagcloud"><a href="/tags/autumn/" style="font-size: 15px;">autumn</a> <a href="/tags/interest/" style="font-size: 15px;">interest</a> <a href="/tags/model/" style="font-size: 15px;">model</a> <a href="/tags/summer/" style="font-size: 15px;">summer</a> <a href="/tags/freedom/" style="font-size: 15px;">freedom</a> <a href="/tags/discipline/" style="font-size: 15px;">discipline</a> <a href="/tags/radio/" style="font-size: 15px;">radio</a> <a href="/tags/plot/" style="font-size: 15px;">plot</a> <a href="/tags/book/" style="font-size: 15px;">book</a> <a href="/tags/gcc/" style="font-size: 15px;">gcc</a> <a href="/tags/CSAPP/" style="font-size: 15px;">CSAPP</a> <a href="/tags/moon/" style="font-size: 15px;">moon</a> <a href="/tags/code/" style="font-size: 15px;">code</a> <a href="/tags/shanghai/" style="font-size: 15px;">shanghai</a> <a href="/tags/night/" style="font-size: 15px;">night</a> <a href="/tags/young/" style="font-size: 15px;">young</a> <a href="/tags/cpp/" style="font-size: 15px;">cpp</a> <a href="/tags/algorithm/" style="font-size: 15px;">algorithm</a> <a href="/tags/sort/" style="font-size: 15px;">sort</a> <a href="/tags/epoll/" style="font-size: 15px;">epoll</a> <a href="/tags/I-O/" style="font-size: 15px;">I/O</a> <a href="/tags/fork/" style="font-size: 15px;">fork</a> <a href="/tags/unix/" style="font-size: 15px;">unix</a> <a href="/tags/manjianghong/" style="font-size: 15px;">manjianghong</a> <a href="/tags/memory/" style="font-size: 15px;">memory</a> <a href="/tags/c/" style="font-size: 15px;">c</a> <a href="/tags/pointer/" style="font-size: 15px;">pointer</a> <a href="/tags/tail-call/" style="font-size: 15px;">tail call</a> <a href="/tags/recursive/" style="font-size: 15px;">recursive</a> <a href="/tags/segment-tree/" style="font-size: 15px;">segment tree</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/tools/" style="font-size: 15px;">tools</a> <a href="/tags/android/" style="font-size: 15px;">android</a> <a href="/tags/lambda/" style="font-size: 15px;">lambda</a> <a href="/tags/2017/" style="font-size: 15px;">2017</a> <a href="/tags/2018/" style="font-size: 15px;">2018</a> <a href="/tags/2019/" style="font-size: 15px;">2019</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> Recent</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/08/07/By-the-end-of-july-2020/">By the end of july 2020</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/true-code-one-s-complement-and-two-s-complement/">true code, one's complement and two's complement</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/07/CSAPP-notes-2-Representation-and-processing-of-information/">CSAPP notes 2: Representation and processing of information</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/29/Thoughts-about-Love-in-the-Time-of-Cholera/">Thoughts about Love in the Time of Cholera</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/12/CSAPP-notes-1-Roaming-in-computer-system/">CSAPP notes 1: Roaming in computer system</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/11/Recommended-CS-books-list-continuous-update/">Recommended CS books list[under continuous update]</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/27/Mourning-for-kobe-bryant/">Mourning for kobe bryant</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/20/The-annual-diary-from-2017-to-2019/">The annual diary from 2017 to 2019</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/18/The-commonly-used-compile-command-of-gcc/">The commonly used compile command of gcc</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/06/use-ListView-and-SimpleAdapter-to-create-list-items/">use ListView and SimpleAdapter to create list items</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> Links</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2020 <a href="/." rel="nofollow">FENICE.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.css"><script type="text/javascript" src="/js/copycode.js" successtext="Copy Successed!"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

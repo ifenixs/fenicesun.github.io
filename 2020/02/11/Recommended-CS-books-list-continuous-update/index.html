@@ -1,51 +1,112 @@
-extends base
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="fenice's blog"><title>Recommended CS books list[under continuous update] | FENICE</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/clipboard/dist/clipboard.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.js"></script><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.css"><meta name="generator" content="Hexo 5.0.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Recommended CS books list[under continuous update]</h1><a id="logo" href="/.">FENICE</a><p class="description">Rock and opera fans</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> Home</i></a><a href="/archives/"><i class="fa fa-archive"> Archive</i></a><a href="/about/"><i class="fa fa-user"> About</i></a><a href="/atom.xml"><i class="fa fa-rss"> RSS</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">Recommended CS books list[under continuous update]</h1><div class="post-meta">2020-02-11<span> | </span><span class="category"><a href="/categories/programming/">programming</a></span></div><div class="post-content"><h3 id="计算机科学推荐书单-持续更新…"><a href="#计算机科学推荐书单-持续更新…" class="headerlink" title="计算机科学推荐书单[持续更新…]"></a>计算机科学推荐书单[持续更新…]</h3><br/>
 
-block title
-  title= page.title + ' | ' + config.title
 
-block content
-  .post
-    h1.post-title= page.title
-    .post-meta= page.date.format('ll')
-      if page.categories.length > 0
-        span= ' | '
-        span.category
-          for category in page.categories.toArray()
-            a(href=url_for(category.path))= category.name
-      if theme.busuanzi == true
-        script(src='https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js', async)
-        span#busuanzi_container_page_pv= ' | '
-          span#busuanzi_value_page_pv
-          span= ' ' + __('Hits')
-    if theme.duoshuo
-      a.ds-thread-count(data-thread-key=page.path, href=url_for(page.path) + '#comments')
-    if theme.disqus
-      a.disqus-comment-count(data-disqus-identifier=page.path, href=url_for(page.path) + '#disqus_thread')
-    if page.toc
-      div(class='clear')
-        div(id='toc' class='toc-article')
-          div(class='toc-title')= __('contents')
-          != toc(page.content)
-    .post-content
-      != page.content
-    if theme.shareto == true
-      script(type='text/javascript', src=url_for(theme.js) + '/share.js' + '?v=' + theme.version, async)
-      a.article-share-link(data-url='#{page.permalink}', data-id='#{page._id}')= __('shareto')
-    include _partial/tag
-    include _partial/post_nav
-    if theme.duoshuo
-      div(class='ds-share flat' data-thread-key=page.path, data-title=page.title, data-url=page.permalink)
-         .ds-share-inline
-            ul.ds-share-icons-16
-              li(data-toggle='ds-share-icons-more')
-                a(class='ds-more' href='javascript:void(0);') 分享到：
-              li
-                a(class='ds-weibo' href='javascript:void(0);' data-service='weibo') 微博
-              li
-                a(class='ds-qzone' href='javascript:void(0);' data-service='qzone') QQ空间
-              li
-                a(class='ds-qqt' href='javascript:void(0);' data-service='qqt') 腾讯微博
-              li
-                a(class='ds-wechat' href='javascript:void(0);' data-service='wechat') 微信
-            .ds-share-icons-more
-    include _partial/comments
+<h4 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h4><ul>
+<li>CODE: <i>The hidden Language of Computer Hardware and Software</i></li>
+<li>Charles Petzold</li>
+<li>4.5 star</li>
+<li>计算机体系结构入门神书，从莫尔斯码讲到盲文，用继电器搭起一台计算机</li>
+</ul>
+<h4 id="代码整洁之道-1"><a href="#代码整洁之道-1" class="headerlink" title="代码整洁之道 1"></a>代码整洁之道 1</h4><ul>
+<li>Clean Code: <i>A Handbook of Agile Software Craftsmanship</i></li>
+<li>Robert C.Martin</li>
+<li>3.8 star</li>
+<li>很好的一本编码习惯经验总结，代码如何命名，如何写好注释，如何设计函数、类，整个系统应该怎样迭代演进，值得一读</li>
+</ul>
+<h4 id="代码整洁之道-2"><a href="#代码整洁之道-2" class="headerlink" title="代码整洁之道 2"></a>代码整洁之道 2</h4><ul>
+<li>The Clean Coder: <i>A Code of Conduct for Professional Programmers</i></li>
+<li>Robert C.Martin</li>
+<li>3.5 star</li>
+<li>一本简短的册子，虽然与技术无关，但是很好地讲述了程序员应该如何让自己更加专业，怎样专业地面对需求，如何正确处理项目的延期和交付，如何验收和测试，怎样管理时间，管理自己的压力，如何与别人协作</li>
+</ul>
+<h4 id="设计模式-可复用面向对象软件的基础"><a href="#设计模式-可复用面向对象软件的基础" class="headerlink" title="设计模式: 可复用面向对象软件的基础"></a>设计模式: 可复用面向对象软件的基础</h4><ul>
+<li>Design Pattern: <i>Element  of Reusable Object-Oriented Software</i></li>
+<li>Erich Gamma/ Richard Helm/ Ralph Johnson/ John Vlissides</li>
+<li>4.6 star</li>
+<li>设计模式只看这本，反复看就完事了</li>
+</ul>
+<h4 id="LINUX系统编程"><a href="#LINUX系统编程" class="headerlink" title="LINUX系统编程"></a>LINUX系统编程</h4><ul>
+<li>LINUX SYSTEM PROGRAMMING</li>
+<li>Robert Love</li>
+<li>3.6 star</li>
+<li>这是一本极好的linux syscall api reference book，适合当工具书</li>
+</ul>
+<h4 id="深入浅出MFC"><a href="#深入浅出MFC" class="headerlink" title="深入浅出MFC"></a>深入浅出MFC</h4><ul>
+<li>Dissecting MFC —<i>using Visual C++ 5.0 &amp; MFC4.2</i></li>
+<li>候杰</li>
+<li>4.2 star</li>
+<li>学MFC时的第一本书。十多年过去了，候杰老师的书透彻清晰，印象深刻</li>
+</ul>
+<h4 id="Java编程思想"><a href="#Java编程思想" class="headerlink" title="Java编程思想"></a>Java编程思想</h4><ul>
+<li>Thinking in Java</li>
+<li>Bruce Eckel</li>
+<li>4.6 star</li>
+<li>学Java看这本就完事了</li>
+</ul>
+<h4 id="C-Primer-Plus"><a href="#C-Primer-Plus" class="headerlink" title="C++ Primer Plus"></a>C++ Primer Plus</h4><ul>
+<li>C++ Primer Plus</li>
+<li>Stephen Prata</li>
+<li>3.8 star</li>
+<li>浅显通俗易懂，C++入门必备</li>
+</ul>
+<h4 id="编程珠玑"><a href="#编程珠玑" class="headerlink" title="编程珠玑"></a>编程珠玑</h4><ul>
+<li>Programming Pearls </li>
+<li>Jon Bentley</li>
+<li>4.5 star</li>
+<li>编程像搞艺术？请看这本</li>
+</ul>
+<h4 id="算法导论"><a href="#算法导论" class="headerlink" title="算法导论"></a>算法导论</h4><ul>
+<li>Introduction to Algorithms</li>
+<li>Thoms H.Cormen / Charles E.Leiserson / Ronald L.Rivest / Clifford Stein</li>
+<li>4.8 star</li>
+<li>第一次看是2011年8月27日，18岁的生日。9年后学到的道理就是人生得耐心，推导要慢慢啃</li>
+</ul>
+<h4 id="Linux程序设计"><a href="#Linux程序设计" class="headerlink" title="Linux程序设计"></a>Linux程序设计</h4><ul>
+<li>Beginning Linux Programming</li>
+<li>Neil Matthew / Richard Stones</li>
+<li>3.5 star</li>
+<li>一本浅显易懂的Linux系统编程入门书，丐版APUE</li>
+</ul>
+<h4 id="深入理解计算机系统"><a href="#深入理解计算机系统" class="headerlink" title="深入理解计算机系统"></a>深入理解计算机系统</h4><ul>
+<li>Computer System: <i>A Programmer’s Perspective</i></li>
+<li>Randal E.Bryant / David O’Hallaron</li>
+<li>4.3 star</li>
+<li>程序员视角讲体系结构，程序优化必读</li>
+</ul>
+<h4 id="推荐系统实践"><a href="#推荐系统实践" class="headerlink" title="推荐系统实践"></a>推荐系统实践</h4><ul>
+<li>Recommand System</li>
+<li>项亮</li>
+<li>3.2 star</li>
+<li>还行吧</li>
+</ul>
+<h4 id="深度学习的数学"><a href="#深度学习的数学" class="headerlink" title="深度学习的数学"></a>深度学习的数学</h4><ul>
+<li>Deep learning ga wakaru sugaku nyumon</li>
+<li>涌井良幸 涌井贞美</li>
+<li>3.9 star</li>
+<li>虽然内容有点过于简单，但是整数简洁明了、循序渐进，讲了深度学习的初等预备知识，看得很爽</li>
+</ul>
+<h4 id="Python在机器学习中的应用"><a href="#Python在机器学习中的应用" class="headerlink" title="Python在机器学习中的应用"></a>Python在机器学习中的应用</h4><ul>
+<li>Python在机器学习中的应用</li>
+<li>余国本 孙玉林</li>
+<li>2.9 star</li>
+<li>本身是本拼凑式blog，之所以还给分是因为章节铺的很好，可以了解机器学习的知识体系</li>
+</ul>
+<h4 id="Python神经网络编程"><a href="#Python神经网络编程" class="headerlink" title="Python神经网络编程"></a>Python神经网络编程</h4><ul>
+<li>Make Your Own Neural Network</li>
+<li>Tariq Rashid</li>
+<li>2.7 star</li>
+<li>不如深度学习的数学</li>
+</ul>
+<h4 id="ROS机器人开发实践"><a href="#ROS机器人开发实践" class="headerlink" title="ROS机器人开发实践"></a>ROS机器人开发实践</h4><ul>
+<li>ROS机器人开发实践</li>
+<li>胡春旭</li>
+<li>2.9 star</li>
+<li>关于ros开发一本不错的blog集</li>
+</ul>
+<h4 id="Software-Architecture-for-Developers"><a href="#Software-Architecture-for-Developers" class="headerlink" title="Software Architecture for Developers"></a>Software Architecture for Developers</h4><ul>
+<li>软件架构</li>
+<li>Simon Brown</li>
+<li>3.0 star</li>
+<li>感觉就是一堆培训讲义</li>
+</ul>
+</div><div class="tags"><a href="/tags/book/"><i class="fa fa-tag"></i>book</a></div><div class="post-nav"><a class="pre" href="/2020/02/12/CSAPP-notes-1-Roaming-in-computer-system/">CSAPP notes 1: Roaming in computer system</a><a class="next" href="/2020/01/27/Mourning-for-kobe-bryant/">Mourning for kobe bryant</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="https://fenicesun.com"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> Categories</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-Science/">Computer Science</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/algorithm/">algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/diary/">diary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/financial-mathematics/">financial mathematics</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/programming/">programming</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/reading-notes/">reading notes</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> Tags</i></div><div class="tagcloud"><a href="/tags/autumn/" style="font-size: 15px;">autumn</a> <a href="/tags/interest/" style="font-size: 15px;">interest</a> <a href="/tags/model/" style="font-size: 15px;">model</a> <a href="/tags/summer/" style="font-size: 15px;">summer</a> <a href="/tags/freedom/" style="font-size: 15px;">freedom</a> <a href="/tags/discipline/" style="font-size: 15px;">discipline</a> <a href="/tags/radio/" style="font-size: 15px;">radio</a> <a href="/tags/plot/" style="font-size: 15px;">plot</a> <a href="/tags/book/" style="font-size: 15px;">book</a> <a href="/tags/gcc/" style="font-size: 15px;">gcc</a> <a href="/tags/CSAPP/" style="font-size: 15px;">CSAPP</a> <a href="/tags/moon/" style="font-size: 15px;">moon</a> <a href="/tags/code/" style="font-size: 15px;">code</a> <a href="/tags/shanghai/" style="font-size: 15px;">shanghai</a> <a href="/tags/night/" style="font-size: 15px;">night</a> <a href="/tags/young/" style="font-size: 15px;">young</a> <a href="/tags/cpp/" style="font-size: 15px;">cpp</a> <a href="/tags/algorithm/" style="font-size: 15px;">algorithm</a> <a href="/tags/sort/" style="font-size: 15px;">sort</a> <a href="/tags/epoll/" style="font-size: 15px;">epoll</a> <a href="/tags/I-O/" style="font-size: 15px;">I/O</a> <a href="/tags/fork/" style="font-size: 15px;">fork</a> <a href="/tags/unix/" style="font-size: 15px;">unix</a> <a href="/tags/manjianghong/" style="font-size: 15px;">manjianghong</a> <a href="/tags/memory/" style="font-size: 15px;">memory</a> <a href="/tags/c/" style="font-size: 15px;">c</a> <a href="/tags/pointer/" style="font-size: 15px;">pointer</a> <a href="/tags/tail-call/" style="font-size: 15px;">tail call</a> <a href="/tags/recursive/" style="font-size: 15px;">recursive</a> <a href="/tags/segment-tree/" style="font-size: 15px;">segment tree</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/tools/" style="font-size: 15px;">tools</a> <a href="/tags/android/" style="font-size: 15px;">android</a> <a href="/tags/lambda/" style="font-size: 15px;">lambda</a> <a href="/tags/2017/" style="font-size: 15px;">2017</a> <a href="/tags/2018/" style="font-size: 15px;">2018</a> <a href="/tags/2019/" style="font-size: 15px;">2019</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> Recent</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/08/07/By-the-end-of-july-2020/">By the end of july 2020</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/true-code-one-s-complement-and-two-s-complement/">true code, one's complement and two's complement</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/07/CSAPP-notes-2-Representation-and-processing-of-information/">CSAPP notes 2: Representation and processing of information</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/29/Thoughts-about-Love-in-the-Time-of-Cholera/">Thoughts about Love in the Time of Cholera</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/12/CSAPP-notes-1-Roaming-in-computer-system/">CSAPP notes 1: Roaming in computer system</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/11/Recommended-CS-books-list-continuous-update/">Recommended CS books list[under continuous update]</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/27/Mourning-for-kobe-bryant/">Mourning for kobe bryant</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/20/The-annual-diary-from-2017-to-2019/">The annual diary from 2017 to 2019</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/18/The-commonly-used-compile-command-of-gcc/">The commonly used compile command of gcc</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/06/use-ListView-and-SimpleAdapter-to-create-list-items/">use ListView and SimpleAdapter to create list items</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> Links</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2020 <a href="/." rel="nofollow">FENICE.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.css"><script type="text/javascript" src="/js/copycode.js" successtext="Copy Successed!"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

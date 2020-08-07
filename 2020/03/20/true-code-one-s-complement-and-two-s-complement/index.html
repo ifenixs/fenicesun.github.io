@@ -1,51 +1,190 @@
-extends base
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="fenice's blog"><title>true code, one's complement and two's complement | FENICE</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/clipboard/dist/clipboard.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.js"></script><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.css"><meta name="generator" content="Hexo 5.0.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">true code, one's complement and two's complement</h1><a id="logo" href="/.">FENICE</a><p class="description">Rock and opera fans</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> Home</i></a><a href="/archives/"><i class="fa fa-archive"> Archive</i></a><a href="/about/"><i class="fa fa-user"> About</i></a><a href="/atom.xml"><i class="fa fa-rss"> RSS</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">true code, one's complement and two's complement</h1><div class="post-meta">2020-03-20<span> | </span><span class="category"><a href="/categories/Computer-Science/">Computer Science</a></span></div><div class="post-content"><h3 id="原码、反码和补码"><a href="#原码、反码和补码" class="headerlink" title="原码、反码和补码"></a>原码、反码和补码</h3><br/>
 
-block title
-  title= page.title + ' | ' + config.title
+<p>对于一个数字，计算机需要使用一定的可运算的编码方式对其进行编码。原码，反码，补码都是计算机对具体二进制数据的编码方式。</p>
 
-block content
-  .post
-    h1.post-title= page.title
-    .post-meta= page.date.format('ll')
-      if page.categories.length > 0
-        span= ' | '
-        span.category
-          for category in page.categories.toArray()
-            a(href=url_for(category.path))= category.name
-      if theme.busuanzi == true
-        script(src='https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js', async)
-        span#busuanzi_container_page_pv= ' | '
-          span#busuanzi_value_page_pv
-          span= ' ' + __('Hits')
-    if theme.duoshuo
-      a.ds-thread-count(data-thread-key=page.path, href=url_for(page.path) + '#comments')
-    if theme.disqus
-      a.disqus-comment-count(data-disqus-identifier=page.path, href=url_for(page.path) + '#disqus_thread')
-    if page.toc
-      div(class='clear')
-        div(id='toc' class='toc-article')
-          div(class='toc-title')= __('contents')
-          != toc(page.content)
-    .post-content
-      != page.content
-    if theme.shareto == true
-      script(type='text/javascript', src=url_for(theme.js) + '/share.js' + '?v=' + theme.version, async)
-      a.article-share-link(data-url='#{page.permalink}', data-id='#{page._id}')= __('shareto')
-    include _partial/tag
-    include _partial/post_nav
-    if theme.duoshuo
-      div(class='ds-share flat' data-thread-key=page.path, data-title=page.title, data-url=page.permalink)
-         .ds-share-inline
-            ul.ds-share-icons-16
-              li(data-toggle='ds-share-icons-more')
-                a(class='ds-more' href='javascript:void(0);') 分享到：
-              li
-                a(class='ds-weibo' href='javascript:void(0);' data-service='weibo') 微博
-              li
-                a(class='ds-qzone' href='javascript:void(0);' data-service='qzone') QQ空间
-              li
-                a(class='ds-qqt' href='javascript:void(0);' data-service='qqt') 腾讯微博
-              li
-                a(class='ds-wechat' href='javascript:void(0);' data-service='wechat') 微信
-            .ds-share-icons-more
-    include _partial/comments
+<p>一个数字在计算机中二进制表示，叫做这个数的机器数。而机器数所要编码的实际数字，叫做真值。这里所要介绍的原码，反码和补码，就是将真值编码成机器数即二进制01序列的编码规则。</p>
+
+<p>对于一个简单的四位数字7， 可以用四个二进制位0111这样的位序列表示。现实中计算机系统在数字的编码和运算时有几个问题：</p>
+
+<ol>
+<li>除了要能表示整数，还需要能够表示负数，也就是机器数需要包含一个符号位（1表示负数，0表示正数）</li>
+<li>计算机系统中，字长有容量和精度限制，通常使用固定长度的二进制位序列来表示一个数。（2字节short，4字节int，8字节long long等）</li>
+<li>由于门电路进行减法运算较为复杂，编码方式在计数运算时需要能够将减法转换为加法。例如对于A - B必须转换为 A + ( -B)</li>
+<li>与问题3相似，判断符号位的操作会使得硬件电路结构变得复杂，因此需要能将符号位一起参与到数字的运算当中去，并且只保留加法运算</li>
+</ol>
+<p>原码、反码和补码的产生过程，就是为了解决引入符号位（正和负）和计算机做减法中的问题。</p>
+
+
+<h4 id="原码"><a href="#原码" class="headerlink" title="原码"></a>原码</h4><p>原码即为符号位加上真值的绝对值，即用最高的一位表示符号（0为正，1为负），其余位表示数值。比如：（以8位二进制为例）</p>
+
+<blockquote>
+<p>[+1] 原码 = 0000 0001<br>[-1] 原码 = 1000 0001</p>
+</blockquote>
+<p>因为第一位是符号位，故8位二进制数的取值范围就是：[1111 1111] ~ [0111 1111]，即为[-127 ~ 127]。推广到n位整数，用原码表示的n位二进制数的取值范围就是：</p>
+
+<blockquote>
+<p>-2^(n-1) ~ 2^(n-1)</p>
+</blockquote>
+<p>原码就是我们通常意义上对二进制数的书面表示。原码是有缺陷的，对于8bit来说，它只能表示255个状态，因为[0000 0000](+0) 和 [1000 0000](-0)其实是一个数，造成了0这个真值的有两种编码的分歧。</p>
+
+<p>让我们做一个原码表示数的运算。</p>
+
+<blockquote>
+<p>0001 + 0010 = 0011 ( 1 + 2 = 3)    // OK</p>
+<p>0000 + 1000 = 1000 ( +0 + (-0) = -0 )   // May be reasonable</p>
+<p>0001 + 1001 = 1010 ( 1 + (-1) = -2) // NOT OK </p>
+</blockquote>
+<p>按二进制数的按位加法，只有正数和正数相加时不会出错，因为就是一个简单的二进制加法，因此原码通常用于正值的计算。而当正数与负数相加，或负数与负数相加，就会因为符号位的存在产生奇怪的结果，需要一套基于符号位判断的更复杂的运算规则才可以保证结果正确，而这对于硬件电路设计来说是不可接受的。于是，反码来了。</p>
+
+
+<h4 id="反码"><a href="#反码" class="headerlink" title="反码"></a>反码</h4><p>如果用原码表示数字，让计算机辨别符号位对基础电路设计来说是不可接受的，而让符号位参与计算，显然对于减法（与负数相加）来说，结果是不正确的。这也是为何计算机内部不使用原码表示数字。为了解决原码做减法的问题，出现了反码。</p>
+
+<p>我们知道，原码在符号位参与运算时会不准确，最严重的表现就是一个数加上他的相反数不等于零。例如：</p>
+
+<blockquote>
+<p>0001 + 1001 = 1010 ( 1 + (-1) = -2)</p>
+<p>0010 + 1010 = 1100 ( 2 + (-2) = -4)</p>
+</blockquote>
+<p>反码的设计思想就冲着解决这一点，既然一个负数是一个正数的相反数，那干脆用一个正数按位取法来表示负数。具体的运算法则是：</p>
+
+<blockquote>
+<p>正数的反码就是其原码</p>
+<p>负数的补码在其原码的基础上，符号位不变，其余各位取反</p>
+</blockquote>
+<p>例如：</p>
+
+<blockquote>
+<p>[ +1 ] = [0000 0001] 原 = [0000 0001] 反</p>
+<p>[ -1 ] = [1000 0001] 原 = [1111 1110] 反</p>
+<p>[ +1 + (-1)] = [0000 0001]  反+ [1111 1110] 反 = [1111 1111] 反 = [1000 0000] 原 = -0</p>
+</blockquote>
+<p>我们看到使用反码计算时，一个数与相反数相加不等于0的问题已经解决。但是似乎又引入了新的问题，让我们尝试两个负数相加：</p>
+
+<blockquote>
+<p>[-1] = [1001] 原 = [1110] 反</p>
+<p>[-3] = [1011] 原 = [1100] 反</p>
+<p>[ -1 + (-3) ] = [1010] 反 = [-5]  // Not equal</p>
+</blockquote>
+<p>反码的运算解决了相反数问题，但是却让两个负数的相加出错了。回头想想计算机数字采用的编码方式需要解决的问题，核心就是要在带符号位的简单二进制相加计算中保证结果的正确性。而两个正数和两个负数的相加，其实都是一个加法问题，只是有无符号位的差别。而正数与负数相加才是真正的减法问题。</p>
+
+<p>也就是说，只要正数与负数的加法不出错，那么问题就得到了解决。反码的负数相加出错，其实问题不大。我们只需要加实现两个负数加法时，将两个负数反码包括符号位全部按位取反相加，然后再给他的符号位强行置1就可以了。所以反码表示法其实已经解决了减法的问题，他不仅不会像原码那样出现两个相反数相加不为零的情况，而且对于任意的一个正数加负数，如：
+0001（1）+1101（-2）=1110（-1） 计算结果是正确的。所以反码与原码比较，最大的优点，就在于解决了减法的问题。</p>
+
+<p>那么为什么计算机科学家仍然不满足于使用反码呢？不知道你有没有注意到上面的一个运算：</p>
+
+<blockquote>
+<p>[ +1 + (-1)] = [0000 0001]  反+ [1111 1110] 反 = [1111 1111] 反 = [1000 0000] 原 = -0</p>
+</blockquote>
+<p>最大问题就是[1111 1111] 反 = -0, 而 -0 = 0？又导致了[1111 1111] = [0000 0000]，是不是和原码的那个问题似曾相识？好吧处女座，接下来介绍我们的大boss补码。</p>
+
+<h4 id="补码"><a href="#补码" class="headerlink" title="补码"></a>补码</h4><p>提出补码，本质上是为了解决一个问题：有符号数原码由于符号位的存在导致的按位加权和与数值真值不对应导致的不能进行加减运算的问题。</p>
+
+<p>将钟表想象成是一个1位的12进制数. 如果当前时间是6点, 我希望将时间设置成4点, 需要怎么做呢?我们可以:</p>
+
+<ol>
+<li>往回拨2个小时: 6 - 2 = 4</li>
+<li>往前拨10个小时: (6 + 10) mod 12 = 4</li>
+<li>往前拨10+12=22个小时: (6+22) mod 12 =4</li>
+</ol>
+<p>方法2和方法3中的mod是取模操作，16 mod 12 = 4， 即用16除以12后的余数是4。所以钟表往回拨（减法）的结果可以用往前拨（加法）代替！现在的焦点就落在了如何用一个正数，来替代一个负数。</p>
+
+<h5 id="同余"><a href="#同余" class="headerlink" title="同余"></a>同余</h5><p>
+两个整数a, b，若它们除以整数m所得的余数相等，则称a，b对于模m同余。记作：a ≡ b (mod m)，举例说明：
+</p>
+
+<blockquote>
+<p>4 mod 12 = 4</p>
+<p>16 mod 12 = 4</p>
+<p>28 mod 12 = 4</p>
+</blockquote>
+<p>我们称4，16，28关于模12同余。</p>
+
+<h5 id="负数取模"><a href="#负数取模" class="headerlink" title="负数取模"></a>负数取模</h5><p>正数进行mod运算很简单，但是负数如何取模呢？ 根据mod运算的数学定义：</p>
+
+<blockquote>
+<p>x mod y = x - y * low_bound(x / y),        for y != 0</p>
+</blockquote>
+<p>上面公式的意思就是，x mod y等于x 减去 y乘上x与y商的下界。以-3 mod 2为例：</p>
+
+<blockquote>
+<p>-3 mod 2</p>
+<p>= -3 - 2 * low_bound(-3 / 2)</p>
+<p>= -3 - 2 * low_bound(-1.5)</p>
+<p>= -3 - 2 * (-2)</p>
+<p>= -3 + 4 = 1 </p>
+</blockquote>
+<p>所以类似的可以得到：</p>
+
+<blockquote>
+<p>(-2) mod 12 = 12-2=10</p>
+<p>(-4) mod 12 = 12-4 = 8</p>
+<p>(-5) mod 12 = 12 - 5 = 7</p>
+</blockquote>
+<p>让我们继续回到时钟的问题上：</p>
+
+<blockquote>
+<p>回拨2小时 = 前拨10小时<br>回拨4小时 = 前拨8小时<br>回拨5小时 = 前拨7小时</p>
+</blockquote>
+<p>结合上面的同余概念，我们还可以发现：</p>
+
+<blockquote>
+<p>-2 mod 12 = 10</p>
+<p> 10 mod 12 = 10</p>
+</blockquote>
+<p>-2和10是同余的。想必你已经知道该怎么做了，那就是用同余的正数去代替负数。要实现这一步，还需要再介绍同余数的两个定理：(同余自反性和线性运算定理)</p>
+
+<h5 id="同余数自反性"><a href="#同余数自反性" class="headerlink" title="同余数自反性"></a>同余数自反性</h5><blockquote>
+<p>a ≡ a (mod m)</p>
+</blockquote>
+<h5 id="线性运算定理"><a href="#线性运算定理" class="headerlink" title="线性运算定理"></a>线性运算定理</h5><blockquote>
+<p>如果a ≡ b (mod m)，c ≡ d (mod m) 那么:</p>
+<p>(1) a ± c ≡ b ± d (mod m)</p>
+<p>(2) a * c ≡ b * d (mod m)</p>
+</blockquote>
+<p>由这两个定理，我们可以得到：</p>
+
+<blockquote>
+<p>7 ≡ 7 (mod 12)</p>
+<p>(-2) ≡ 10 (mod 12)</p>
+<p>7 - 2 ≡ (7 + 10) (mod 12)</p>
+</blockquote>
+<p>现在我们为一个负数，找到了它的正数同余数。我们根据上面可以发现， 7 - 2的结果等于(7 + 10) mod 12，至此，我们成功将一个减法操作转换成加法与模运算。</p>
+
+<p>在这里，我们再次强调原码，反码，补码的引入是为了解决做减法的问题。在原码，反码表示法中，我们把减法化为加法的思维是减去一个数，等于加上一个数的相反数，结果发现引入了符号位，却因为符号位造成了各种意向不到的问题。</p>
+
+<p>但是从上面的例子中，我们可以看到其实减去一个数，对于数值有限制，有溢出的运算（模运算）来说，其实也相当于加上这个数的同余数。计算机的字长是定长的，即存储和处理的位数是有限的，因此它也有一个计量范围，即都存在一个“模”。事实上对于计算机中的存储的数值，通常都用限制长度的（2bytes,4bytes or 8bytes）位序列来存放。</p>
+
+<p>也就是说，对于计算机中的存储的数值，我们可以不引入负数的概念，就可以利用同余数定理把减法当成加法来计算。补码的思想，就是在把减法当成加法时并不是必须要引入符号位。下面举一个例子，还可以顺便回答为什么负数的符号位是1，而不是0。</p>
+
+<p>现在我们做一个四位二进制数的减法（先不引入符号位）</p>
+
+<blockquote>
+<p>0110 (6) - 0010 (2) = 6 - 2 = 4 (计算机中没有减法器，所以无法运算)</p>
+</blockquote>
+<p>这时候想想同余定理，减去一个数，可以等于加上这个负数的正同余数,从时钟运算中我们可以看出这个数与减数相加正好等于模。那么四位二进制数的模是多少呢？也就是四位二进制数的最大容量是2^4 = 16 = 10000b，那么-2的同余数就是14，既然如此</p>
+
+<blockquote>
+<p>0110 (6) - 0010 (2) = 0110 (6) + 1110 (14) = 10100 (20 = 16 + 4)</p>
+</blockquote>
+<p>OK，我们看到按照这种算法得出的结果是10100，但是对于四位二进制数，由于硬件限制只能存放四位，最高位将被舍去，低四位0100即是我们的计算结果（4）。</p>
+<p>减去2，也就是加上-2，即加上-2和加上14得到的二进制结果是一样的，如果我们把1110（14）的最高位看作符号位后就是-2的补码，这可能就解释了为什么负数的符号位是1而不是0。在有符号的四位二进制数中，能表示的范围只有[-8 ~ 7]，而无符号数的作用和有符号数（-2）的作用效果其实是一样的。那正数的补码呢，就是他本身了。</p>
+
+<p>到这里，我们发现原码、反码的问题，补码基本都解决了。而且补码中也不存在负零了，因为1000表示-8，0001（1）+ 1111 （-1）= 0000。负数与负数相加的问题也没了，1111（-1) + 1110 (-2) = 1101 (-3) </p>
+
+<p>现在我们可以给出补码的求法（注意是求法）：</p>
+
+<blockquote>
+<p>正数的补码就是他本身</p>
+<p>负数的补码等于反码+1</p>
+</blockquote>
+<p>也有另一种计算方法：原码自低位向高位，尾数的第一个‘1’及其右边的‘0’保持不变，左边的各位按位取反，符号位不变。这些都是补码的求法而已。当年学计组的时候，十分不理解为什么补码=反码+1，其实根本不用在意，只是补码恰好等于反码+1，忘掉它就是了。</p>
+
+<p>最后我们再看看负数的补码为什么是反码+1。因为负数的反码加上这个负数的绝对值正好等于1111，再加1，就是1000，也就是四位二进制的模。而负数的补码是它的绝对值的同余数，可以通过模减去负数的绝对值，得到它的补码。所以补码就是它的反码+1。</p>
+
+
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>原码、反码和补码都是为了解决数字的二进制编码和运算中的问题。由于既要表示正数也要表示负数，原码引入符号位来表示数字的符号。但是由于符号位的引入，导致在有负数参与运算时结果不正确，且在0这个数字上出现双重编码。</p>
+
+<p>因为原码的缺陷，计算机科学家们又发明了反码，反码解决了减法运算的问题，却在负数与负数的运算上出现了问题，且出现了-0这样的bug。</p>
+
+<p>补码的出现彻底解决了减法与0的问题。它的核心是同余数运算，将一个减法转换成与同余数的加法，从本质上解决了由于符号位存在而导致的编码规则下按位加权的加减运算和真值运算结果不对应的问题，实现了加减运算的完美统一。 现代计算机中都采用补码作为内部数值编码方式。</p>　　
+</div><div class="tags"><a href="/tags/CSAPP/"><i class="fa fa-tag"></i>CSAPP</a></div><div class="post-nav"><a class="pre" href="/2020/08/07/By-the-end-of-july-2020/">By the end of july 2020</a><a class="next" href="/2020/03/07/CSAPP-notes-2-Representation-and-processing-of-information/">CSAPP notes 2: Representation and processing of information</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="https://fenicesun.com"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> Categories</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-Science/">Computer Science</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/algorithm/">algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/diary/">diary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/financial-mathematics/">financial mathematics</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/programming/">programming</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/reading-notes/">reading notes</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> Tags</i></div><div class="tagcloud"><a href="/tags/autumn/" style="font-size: 15px;">autumn</a> <a href="/tags/interest/" style="font-size: 15px;">interest</a> <a href="/tags/model/" style="font-size: 15px;">model</a> <a href="/tags/summer/" style="font-size: 15px;">summer</a> <a href="/tags/freedom/" style="font-size: 15px;">freedom</a> <a href="/tags/discipline/" style="font-size: 15px;">discipline</a> <a href="/tags/radio/" style="font-size: 15px;">radio</a> <a href="/tags/plot/" style="font-size: 15px;">plot</a> <a href="/tags/book/" style="font-size: 15px;">book</a> <a href="/tags/gcc/" style="font-size: 15px;">gcc</a> <a href="/tags/CSAPP/" style="font-size: 15px;">CSAPP</a> <a href="/tags/moon/" style="font-size: 15px;">moon</a> <a href="/tags/code/" style="font-size: 15px;">code</a> <a href="/tags/shanghai/" style="font-size: 15px;">shanghai</a> <a href="/tags/night/" style="font-size: 15px;">night</a> <a href="/tags/young/" style="font-size: 15px;">young</a> <a href="/tags/cpp/" style="font-size: 15px;">cpp</a> <a href="/tags/algorithm/" style="font-size: 15px;">algorithm</a> <a href="/tags/sort/" style="font-size: 15px;">sort</a> <a href="/tags/epoll/" style="font-size: 15px;">epoll</a> <a href="/tags/I-O/" style="font-size: 15px;">I/O</a> <a href="/tags/fork/" style="font-size: 15px;">fork</a> <a href="/tags/unix/" style="font-size: 15px;">unix</a> <a href="/tags/manjianghong/" style="font-size: 15px;">manjianghong</a> <a href="/tags/memory/" style="font-size: 15px;">memory</a> <a href="/tags/c/" style="font-size: 15px;">c</a> <a href="/tags/pointer/" style="font-size: 15px;">pointer</a> <a href="/tags/tail-call/" style="font-size: 15px;">tail call</a> <a href="/tags/recursive/" style="font-size: 15px;">recursive</a> <a href="/tags/segment-tree/" style="font-size: 15px;">segment tree</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/tools/" style="font-size: 15px;">tools</a> <a href="/tags/android/" style="font-size: 15px;">android</a> <a href="/tags/lambda/" style="font-size: 15px;">lambda</a> <a href="/tags/2017/" style="font-size: 15px;">2017</a> <a href="/tags/2018/" style="font-size: 15px;">2018</a> <a href="/tags/2019/" style="font-size: 15px;">2019</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> Recent</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/08/07/By-the-end-of-july-2020/">By the end of july 2020</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/20/true-code-one-s-complement-and-two-s-complement/">true code, one's complement and two's complement</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/03/07/CSAPP-notes-2-Representation-and-processing-of-information/">CSAPP notes 2: Representation and processing of information</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/29/Thoughts-about-Love-in-the-Time-of-Cholera/">Thoughts about Love in the Time of Cholera</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/12/CSAPP-notes-1-Roaming-in-computer-system/">CSAPP notes 1: Roaming in computer system</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/02/11/Recommended-CS-books-list-continuous-update/">Recommended CS books list[under continuous update]</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/27/Mourning-for-kobe-bryant/">Mourning for kobe bryant</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/01/20/The-annual-diary-from-2017-to-2019/">The annual diary from 2017 to 2019</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/04/18/The-commonly-used-compile-command-of-gcc/">The commonly used compile command of gcc</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/05/06/use-ListView-and-SimpleAdapter-to-create-list-items/">use ListView and SimpleAdapter to create list items</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> Links</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2020 <a href="/." rel="nofollow">FENICE.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.css"><script type="text/javascript" src="/js/copycode.js" successtext="Copy Successed!"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
