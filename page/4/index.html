@@ -1,242 +1,607 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
-    <meta name="keywords" content="hexo, autumn" />
-    <title>
-        FENICE
-    </title>
-    <!-- favicon -->
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"fenicesun.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="fenice&#39;s blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="FENICE">
+<meta property="og:url" content="https://fenicesun.com/page/4/index.html">
+<meta property="og:site_name" content="FENICE">
+<meta property="og:description" content="fenice&#39;s blog">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="Fenice Sun">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://fenicesun.com/page/4/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'en'
+  };
+</script>
+
+  <title>FENICE</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">FENICE</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Rock and opera fans</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
     
-    <link rel="icon" href="https://cdn.jsdelivr.net/gh/frontendsophie/hexo-theme-autumn@1.0.0/source/img/favicon.ico" />
-     
-<link rel="stylesheet" href="/css/style.css">
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
 
 
-    <!-- highlight -->
-    <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/github-gist.min.css" />
-    <script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
-    <script>
-        hljs.initHighlightingOnLoad()
-    </script>
-    <script src="https://cdn.jsdelivr.net/gh/frontendsophie/hexo-infinite-scroll@2.0.0/dist/main.js"></script>
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
 
-    <script>
-        infiniteScroll()
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://fenicesun.com/2012/08/09/Radio-plot/">
 
-        window.addEventListener('DOMContentLoaded', function () {
-            const [
-                mainTitle,
-                mobileMenu,
-                mobileMainTitle,
-                mobileMenuBtn,
-                ipadMenuBtn,
-                aside,
-                closeBtn,
-            ] = getEle(
-                '#main-title',
-                '.mobile-menu',
-                '.mobile-menu h3',
-                '.mobile-menu button',
-                '.ipad-menu',
-                'aside',
-                'aside .close',
-            )
-            const io = new IntersectionObserver(entries => {
-                if (entries[0].intersectionRatio <= 0) {
-                    mobileMainTitle.classList.remove('invisibile')
-                } else {
-                    mobileMainTitle.classList.add('invisibile')
-                }
-            })
-            io.observe(mainTitle)
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Fenice Sun">
+      <meta itemprop="description" content="fenice's blog">
+    </span>
 
-            clickToggleAside(mobileMenuBtn)
-            clickToggleAside(ipadMenuBtn)
-            clickToggleAside(closeBtn, false)
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FENICE">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2012/08/09/Radio-plot/" class="post-title-link" itemprop="url">Radio plot</a>
+        </h2>
 
-            const isMenuVisible = window.getComputedStyle(mobileMenu).display !== 'none'
-            if (isMenuVisible) document.body.style.background = 'none'
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
 
-            function getEle(...args) {
-                return args.map(arg => document.querySelector(arg))
-            }
+              <time title="Created: 2012-08-09 01:25:19" itemprop="dateCreated datePublished" datetime="2012-08-09T01:25:19+08:00">2012-08-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-01 22:05:35" itemprop="dateModified" datetime="2020-03-01T22:05:35+08:00">2020-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/diary/" itemprop="url" rel="index"><span itemprop="name">diary</span></a>
+                </span>
+            </span>
 
-            function clickToggleAside(btn, show = true) {
-                btn.addEventListener('click', function () {
-                    if (show) {
-                        aside.style.display = 'block'
-                    } else {
-                        aside.style.display = 'none'
-                    }
-                })
-            }
-        })
-    </script>
-<meta name="generator" content="Hexo 5.0.0"></head>
+          
 
-<body style="background: url(https://cdn.jsdelivr.net/gh/frontendsophie/hexo-theme-autumn@1.0.0/source/img/button-bg.png) #f3f3f3">
-    <div class="container">
-        <header class="header">
-    <nav class="mobile-menu" style="background: url(https://cdn.jsdelivr.net/gh/frontendsophie/hexo-theme-autumn@1.0.0/source/img/button-bg.png) #f3f3f3">
-        <h3 class="invisibile">
-            <a href="/" class="logo">
-                FENICE
-            </a>
-        </h3>
-        <button class="menu">menu</button>
-    </nav>
+        </div>
+      </header>
 
-    <button class="ipad-menu menu">menu</button>
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
-    <h1 class="title" id="main-title">
-        <a href="/" class="logo">
-            FENICE
+      
+          <h3 id="电台情节"><a href="#电台情节" class="headerlink" title="电台情节"></a>电台情节</h3><br />
+<p>当我还是一个很年轻的中学生的时候，手里不时地能拥有一个收音机。</p>
+<p>德生，安健，或者是集成在其他设备上的。</p>
+<p>最初只是因为年幼家贫手里没有任何可把玩的数码产品，却能用两节5号电池听到外面的声音而感到兴奋。</p>
+<p>我喜欢电台里的音乐，尤其是那些深情款款的情歌，并且讨厌AM频道里“滋滋”的杂声。</p>
+<p>初中的时候在县城读书，父母给我在县中对面租了间小房子。那时候家里还不是很宽裕，不可能有高级的数码产品。每天早晨父亲都会在给我准备早饭的时候打开收音机的淮安台，那是一档音乐时间，还记得那时的场景。略有凉意的秋天，早晨的雾气很重，6点10分左右收音机里就会传来王菲那首深情的我愿意。</p>
+
+<blockquote>
+<p>“我愿意为你”</p>
+</blockquote>
+<p>初中没有晚自习，每天晚上吃完饭的时候习惯性的把电台调到FM建湖广播，30分钟的点歌时间，虽然没有什么好的音乐，我还是一直撑到节目的结束，因为我实在没有其他途径能听到流行歌曲了。倒是那个年代电台里总有人点一些过于流行的歌，听了多了有种俗气的感觉。记得最深有首叫快乐崇拜的歌，每天都放听到厌烦。</p>
+<p>初中懵懂、孤独而欢乐着的时光不经意间就过去了，至今还记得每逢考试前祈祷的场景。
+高中依然很幼稚，那三年喜欢了一个女生，被第一眼的感觉折磨地死去活来直到多年以后，其实还是在自己的世界里想着自己的事而别人没有理会而已。</p>
+<p>高一寒假把姑姑给我的剩下的钱买了台安健的收音机，120块，其实那时手上已经有很多数码设备了，有了属于自己的笔记本电脑，mp4,还有学习机什么的。只是更喜欢电台。</p>
+<p>那时候的生活还是很规律，尽管叛逆，孤独。只要有时间，每到晚上九点半就会听盐城交通广播台一档叫“都市夜心情”的节目，失意的人们讲述自己的不幸的故事，那个叫恒非的男主播会一一开导他们，教导他们如何对待感情和生活，是那样的理性。有时男主播也会读一段感人的情感故事，我静静聆听。当时只是关注那些人们的故事，企图从他们身上找到自己故事的翻版，偶尔也有罢了。很可惜我高二的时候那档节目已经没有了，也不知道调整到了哪个时间段，只知道男主播去了多伦多高中当了教师。</p>
+<p>炜炜动听是我很喜爱的一个节目，这是一档点歌音乐节目，音乐非常不错。坚持听这档节目的更深原因是节目名和我当时疯狂喜欢的一个女生的名字一样。我高二时那个女主播好像已经29岁, 那时是09年。</p>
+<p>后来还听过很多不同的电台节目，中学那段迷茫的年代短短续续地听着解着闷。时常想象着要是有一天我也能去主播一个节目，放着我喜欢的音乐，读着我喜欢的文章，讲述我喜欢的故事，这是一种多么不错的感觉。不过逐渐忙碌后也只能从别人的文章里看到我电台的记忆了。</p>
+<p>可能在我的梦里，我也是一个电台主播。</p>
+
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://fenicesun.com/2012/07/17/The-time-that-there-is-no-light-in-the-night-sky/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Fenice Sun">
+      <meta itemprop="description" content="fenice's blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FENICE">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2012/07/17/The-time-that-there-is-no-light-in-the-night-sky/" class="post-title-link" itemprop="url">The time that there is no light in the night sky</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2012-07-17 15:57:40" itemprop="dateCreated datePublished" datetime="2012-07-17T15:57:40+08:00">2012-07-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-01 22:11:57" itemprop="dateModified" datetime="2020-03-01T22:11:57+08:00">2020-03-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/diary/" itemprop="url" rel="index"><span itemprop="name">diary</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="那年的夜空没有光"><a href="#那年的夜空没有光" class="headerlink" title="那年的夜空没有光"></a>那年的夜空没有光</h3><br/>
+<p>很多年之前，当我还是个小孩子的时候，约莫2年级到5年级的光景，夜晚的天空是没有光的。</p>
+
+<p>那些年还住在郊区，周围都是各式的厂子，上班的工人都是临近的农村的人们，每到晚上8点过后，记忆中除了一家水泥厂，其他的厂房都陷入一片寂静和黑暗之中。</p>
+
+<p>那时候我家就在水泥厂的家属区，居住在那儿的人还很多，但是一到晚上，整个家属区立刻黑的没影。</p>
+
+<p>记忆中那时的星星是灿烂而明亮的，就像挂在天空的璀璨的钻石，纯净而闪耀在我心里。</p>
+
+<p>那些年我妈还在水泥厂上班，夜班时每晚12点起来去工作，日子艰难得很</p>
+
+<p>有时一个人在自己房间里仰望着天空，年幼的时候，没有那么多的事情需要去思考。没有那么多梦，没有那么多追逐，没有爱过谁，也还有很多简单的快乐。我想着的也就是周末怎么打发以及什么时候才能有那一个机器人玩具或者四驱车。</p>
+
+<p>那时的心境就像那时的天空，纯净的一丝不染。</p>
+
+<p>时常下乡去外婆家，乡村的夜晚，记忆格外清晰。</p>
+
+<p>乡村的夜晚，7点以后只有各家窗户点点从电视机里透出的光，偶尔有晚归的人打上手电行走在砖泥小路上。我从不敢在夜晚走在那里的小路，连出堂屋的门都觉得害怕，一是年纪小，二是晚上真是什么都看不到，在那种离城市无限远的地方。</p>
+
+<p>大人说晚上不能出去，会遇到鬼火，我吓着了。</p>
+
+<p>记忆很深的一个场景，一个夜晚，晚上妈妈和外婆在厨房忙着，我站在堂屋前的天井里，呆呆地望着天，一片漆黑，除了那几棵遥远而闪烁的星星，尽情绽放他们的光芒。远处不知道哪里的电线杆上的大喇叭广播，正在放着当时很火的一部叫《萧十一郎》的电视剧的主题曲，听的我入迷。很多年后我知道那首歌叫《转弯》，都是后话了。</p>
+
+<p>那些年的我年幼而无知，没有零用钱也没有城里孩子的各种，沉浸在自己的世界里并自得其乐，不会去想着哪家公司或是上哪个大学，不会因为想到某个人而彻夜难眠。那时的天空尚未开化，没有太多的光。偶尔看着星星都能觉得满足，虽然全家生活的还不是很好，然是快乐着。</p>
+
+<p>随着年岁的慢慢增长，到城里上了学，后来家也搬进了城里，爱过某个人，认识了很多人，上了大学，找了工作。
+但是各种压力和忙碌伴随而来，并且享受着他们，天空逐渐亮了起来，光的强度也越来越大，直到发现，似乎夜空就是亮的。</p>
+
+<p>我知道这是成长和生活必需的一步。伤感而无措。</p>
+
+<p>想起那年的夜空没有光。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://fenicesun.com/2012/05/15/a-guide-to-when-to-use-reference-parameters-in-cpp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Fenice Sun">
+      <meta itemprop="description" content="fenice's blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="FENICE">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2012/05/15/a-guide-to-when-to-use-reference-parameters-in-cpp/" class="post-title-link" itemprop="url">a guide to when to use reference parameters in cpp</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2012-05-15 13:28:49" itemprop="dateCreated datePublished" datetime="2012-05-15T13:28:49+08:00">2012-05-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-01-18 23:51:48" itemprop="dateModified" datetime="2019-01-18T23:51:48+08:00">2019-01-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/programming/" itemprop="url" rel="index"><span itemprop="name">programming</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="何时在C-中使用引用参数"><a href="#何时在C-中使用引用参数" class="headerlink" title="何时在C++中使用引用参数"></a>何时在C++中使用引用参数</h3><blockquote>
+<p>引用是变量的别名，与目标变量共同指向目标变量的内存地址，对引用的操作和对变量的操作完全一样。使用引用的主要目的在于函数参数的传递中，解决大块数据或对象的传递效率问题。</p>
+</blockquote>
+<h4 id="引用作为参数"><a href="#引用作为参数" class="headerlink" title="引用作为参数"></a>引用作为参数</h4><blockquote>
+<p>使用引用传递函数的参数，在内存中并没有产生实参的副本，它是直接对实参操作；而使用一般变量传递函数的参数，当发生函数调用时，需要给形参分配存储单元，形参变量是实参变量的副本；如果传递的是对象，还将调用拷贝构造函数。因此，在传递参数的字节数较大时，用引用参数比一般变量传递参数省去了变量拷贝的内存分配和时间开销，效率更高。使用指针作为函数参数和与使用引用参数效果类似，但是调用函数中同样要给形参（指针变量）分配储存单元，且容易产生错误且程序阅读性较差。</p>
+</blockquote>
+<h4 id="指导原则"><a href="#指导原则" class="headerlink" title="指导原则"></a>指导原则</h4><ol>
+<li><p>对于使用传递的值而不做修改的函数:</p>
+<ul>
+<li>如果数据对象很小，如内置数据结构或小型结构，则按值传递。</li>
+<li>如果数据对象是数组，则使用指针。</li>
+<li>如果数据对象是较大的结构，则使用const指针或者const引用，以提高效率，节省复制结构所需的时间和空间。</li>
+<li>如果数据对象是类对象，则使用const引用。传递类对象参数的标准方式是按引用传递。</li>
+</ul>
+</li>
+<li><p>对于修改调用函数中数据的函数:</p>
+<ul>
+<li>如果数据对象是内置数据类型，则使用指针。</li>
+<li>如果数据对象是数组，则只能使用指针。</li>
+<li>如果数据对象是结构，则使用引用或指针。</li>
+<li>如果数据对象是类对象，则使用引用。</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Fenice Sun</p>
+  <div class="site-description" itemprop="description">fenice's blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-name">posts</span>
         </a>
-    </h1>
-    <h2 class="desc">
-        Rock and opera fans
-    </h2>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
 
-    <div class="links">
-        <ul>
-            
-            <li>
-                <a target="_blank" rel="noopener" href="https://github.com/fenicesun">
-                    Github
-                </a>
-            </li>
-            
-            <li>
-                <a target="_blank" rel="noopener" href="https://www.linkedin.com/">
-                    LinkedIn
-                </a>
-            </li>
-            
-        </ul>
+
+
+      </div>
+
     </div>
-</header>
-        <main class="main">
-            
-<section class="posts">
-    
-        <article class="post">
-            
-                <h4 class="post-cat">
-                    <a href="/categories/diary/">
-                        diary
-                    </a>
-                </h4>
-                
-                    <h1 class="post-title">
-                        <a href="/2012/08/09/Radio-plot/">
-                            Radio plot
-                        </a>
-                    </h1>
+  </aside>
+  <div id="sidebar-dimmer"></div>
 
-                    <ul class="post-date">
-                        <li>
-                            August 9, 2012
-                        </li>
-                        <li>
-                            Fenice Sun
-                        </li>
-                    </ul>
-                    
-                    <div class="post-content ">
-                        
-                            <a href="/2012/08/09/Radio-plot/" class="more-link">Continue reading</a>
-                    </div>
-        </article>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
         
-        <article class="post">
-            
-                <h4 class="post-cat">
-                    <a href="/categories/diary/">
-                        diary
-                    </a>
-                </h4>
-                
-                    <h1 class="post-title">
-                        <a href="/2012/07/17/The-time-that-there-is-no-light-in-the-night-sky/">
-                            The time that there is no light in the night sky
-                        </a>
-                    </h1>
 
-                    <ul class="post-date">
-                        <li>
-                            July 17, 2012
-                        </li>
-                        <li>
-                            Fenice Sun
-                        </li>
-                    </ul>
-                    
-                    <div class="post-content ">
-                        
-                            <a href="/2012/07/17/The-time-that-there-is-no-light-in-the-night-sky/" class="more-link">Continue reading</a>
-                    </div>
-        </article>
         
-        <article class="post">
-            
-                <h4 class="post-cat">
-                    <a href="/categories/programming/">
-                        programming
-                    </a>
-                </h4>
-                
-                    <h1 class="post-title">
-                        <a href="/2012/05/15/a-guide-to-when-to-use-reference-parameters-in-cpp/">
-                            a guide to when to use reference parameters in cpp
-                        </a>
-                    </h1>
 
-                    <ul class="post-date">
-                        <li>
-                            May 15, 2012
-                        </li>
-                        <li>
-                            Fenice Sun
-                        </li>
-                    </ul>
-                    
-                    <div class="post-content ">
-                        
-                            <a href="/2012/05/15/a-guide-to-when-to-use-reference-parameters-in-cpp/" class="more-link">Continue reading</a>
-                    </div>
-        </article>
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Fenice Sun</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
         
-</section>
-
-        </main>
-        <aside class="aside">
-            <div class="close"></div>
-            <section class="aside-section">
-                
-    <h1>Categories</h1>
-
-    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-Science/">Computer Science</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/algorithm/">algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/diary/">diary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/financial-mathematics/">financial mathematics</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/programming/">programming</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/reading-notes/">reading notes</a></li></ul>
-
-            </section>
-            <section class="aside-section">
-                
-    <h1>Archives</h1>
-
-    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/">2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/">2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/">2013</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/">2012</a></li></ul>
 
 
-            </section>
-            <section class="aside-section tag">
-                
-    <h1>Tags</h1>
 
-    <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/2017/" rel="tag">2017</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/2018/" rel="tag">2018</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/2019/" rel="tag">2019</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSAPP/" rel="tag">CSAPP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/I-O/" rel="tag">I/O</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/" rel="tag">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/" rel="tag">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/autumn/" rel="tag">autumn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/book/" rel="tag">book</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/" rel="tag">c</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/code/" rel="tag">code</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cpp/" rel="tag">cpp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/discipline/" rel="tag">discipline</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/epoll/" rel="tag">epoll</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fork/" rel="tag">fork</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/freedom/" rel="tag">freedom</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gcc/" rel="tag">gcc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/interest/" rel="tag">interest</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lambda/" rel="tag">lambda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/manjianghong/" rel="tag">manjianghong</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/memory/" rel="tag">memory</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/model/" rel="tag">model</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/moon/" rel="tag">moon</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/night/" rel="tag">night</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/plot/" rel="tag">plot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pointer/" rel="tag">pointer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/radio/" rel="tag">radio</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/recursive/" rel="tag">recursive</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/segment-tree/" rel="tag">segment tree</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shanghai/" rel="tag">shanghai</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sort/" rel="tag">sort</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/summer/" rel="tag">summer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tail-call/" rel="tag">tail call</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/" rel="tag">tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/unix/" rel="tag">unix</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/young/" rel="tag">young</a></li></ul>
 
-            </section>
-        </aside>
-    </div>
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
 </body>
-
 </html>
